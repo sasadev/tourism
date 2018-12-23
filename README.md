@@ -21,4 +21,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
+ruby -v 2.5.3
+rails -v 5.0.7
+postgresql -v 9.6.1
+
 * ...
