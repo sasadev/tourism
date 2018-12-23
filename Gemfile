@@ -51,3 +51,46 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# 追加文
+
+gem 'pg'
+gem 'unicorn'
+gem 'kaminari'
+gem 'moji'
+gem 'exception_notification'
+gem 'enum_help'
+gem 'breadcrumbs_on_rails'
+gem 'certified'
+gem 'gmail'
+gem 'obfuscatable'
+gem 'unf'
+gem 'draper'
+gem 'meta-tags'
+gem 'rqrcode_png'
+gem 'thinreports', '0.10.0'
+gem 'redis'
+gem 'faker'
+
+# 画像
+gem 'rmagick'
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'non-stupid-digest-assets'
+
+# ckeditor depending on mini_magick and carrierwave
+gem 'ckeditor'
+
+# Active Record
+gem 'nested_form'
+gem 'validates_email_format_of'
+gem 'activerecord-session_store'
+gem 'activerecord-import'
+
+# Use decorator
+gem 'mailgun_rails'
+
+group :development do
+  gem 'mailcatcher'
+end
