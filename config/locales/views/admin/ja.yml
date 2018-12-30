@@ -42,10 +42,6 @@ ja:
         title: ジャンル管理
         actions:
           <<: *default
-      genres:
-        title: ジャンル管理
-        actions:
-          <<: *default
       price_ranges:
         title: 価格帯管理
         actions:
@@ -55,13 +51,8 @@ ja:
         actions:
           <<: *default
       preferences:
-        title: 設定管理
+        title: 好み管理
         actions:
-          <<: *default
-      preferences:
-        title: メールボックス
-        actions:
-          condition: 振り分け条件登録
           <<: *default
       system_mail_conditions:
         title: メール条件

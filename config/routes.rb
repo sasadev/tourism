@@ -16,15 +16,23 @@ Rails.application.routes.draw do
     resources :contents
 
     # カテゴリ
-    resources :categories
+    resources :categories do
+      match :sort, via: [:get, :post], on: :collection
+    end
 
     # ジャンル
-    resources :genres
+    resources :genres do
+      match :sort, via: [:get, :post], on: :collection
+    end
 
     # 価格帯
-    resources :price_ranges
+    resources :price_ranges do
+      match :sort, via: [:get, :post], on: :collection
+    end
 
-    # 設定
-    resources :preferences
+    # 好み
+    resources :preferences do
+      match :sort, via: [:get, :post], on: :collection
+    end
   end
 end

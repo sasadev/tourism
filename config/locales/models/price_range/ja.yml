@@ -24,6 +24,9 @@ ja:
           destroy:
             success:  価格帯の削除を完了しました。
             failure:  価格帯を削除できません。
+          sort_seq:
+            success:  価格帯の並び順を変更しました。
+            failure:  価格帯の並び順の変更時にエラーが起こりました
           cancel:
             success:  価格帯のキャンセルを完了しました。
             failure:  価格帯をキャンセルできません。

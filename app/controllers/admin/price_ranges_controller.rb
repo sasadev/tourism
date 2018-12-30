@@ -20,9 +20,14 @@ class Admin::PriceRangesController < Admin::BaseController
 
   def create
     @price_range = PriceRange.new(price_range_params)
-
+    sort = PriceRange.last.try(:sort_seq)
+    if sort.present?
+      @price_range.sort_seq = (sort.to_i + 1)
+    else
+      @price_range.sort_seq = 1
+    end
     if @price_range.save
-      redirect_to edit_admin_price_range_path(@price_range), notice: t('activerecord.flash.price_range.actions.destroy.success')
+      redirect_to edit_admin_price_range_path(@price_range), notice: t('activerecord.flash.price_range.actions.create.success')
     else
       flash.now[:alert] = t('activerecord.flash.price_range.actions.create.failure')
       render :new
@@ -36,6 +41,7 @@ class Admin::PriceRangesController < Admin::BaseController
     if @price_range.update(price_range_params)
       redirect_to edit_admin_price_range_path(@price_range), notice: t('activerecord.flash.price_range.actions.update.success')
     else
+      flash.now[:alert] = t('activerecord.flash.price_range.actions.update.failure')
       render :edit
     end
   end
@@ -47,6 +53,26 @@ class Admin::PriceRangesController < Admin::BaseController
       flash[:alert] = t('activerecord.flash.price_range.actions.destroy.failure')
       redirect_to admin_price_ranges_path
     end
+  end
+
+  def sort
+    if request.post?
+      begin
+        PriceRange.transaction do
+          params[:price_range_contents].each.with_index(1) do |price_range_id,i|
+            price_range = PriceRange.find_by(id: price_range_id)
+            price_range.sort_seq = i
+            price_range.save
+          end
+        end
+        flash[:notice] = t('activerecord.flash.price_range.actions.sort_seq.success')
+      rescue => e
+        p e
+        flash[:alert] = t('activerecord.flash.price_range.actions.sort_seq.failure')
+      end
+    end
+
+    redirect_to action: :index
   end
 
   private

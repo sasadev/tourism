@@ -1,9 +1,8 @@
-class PriceRangeSearchForm < SearchForm
+class GenreSearchForm < SearchForm
   attr_accessor :deleted
 
   like_attributes :title
 
-  equal_attributes :begining_price, :end_price
 
   def custom_hook(scoped)
     scoped = scoped.alive_records
