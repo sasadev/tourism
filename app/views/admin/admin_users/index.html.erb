@@ -1,0 +1,36 @@
+  <%= render partial: 'search_form' %>
+  <div class="row">
+    <div class="col-12">
+      <div class="box">
+        <div class="box-header">
+        </div>
+        <div class="box-body no-padding">
+          <table class="table table-bordered table-responsive">
+            <tr>
+              <th></th>
+              <th><%= AdminUser.human_attribute_name :name %></th>
+              <th><%= AdminUser.human_attribute_name :email %></th>
+              <th></th>
+            </tr>
+            <% @admin_users.each.with_index(1) do |admin_user, i| %>
+                <tr style="line-height: 65px;">
+                  <td><%= i %></td>
+                  <td><%= admin_user.name %></td>
+                  <td><%= admin_user.email %></td>
+                  <td colspan="2">
+                    <%= link_to raw('<i class="fa fa-edit"></i> 編集'), edit_admin_admin_user_path(admin_user), class: 'btn btn-app bg-blue' %>
+                    <%= link_to raw('<i class="fa fa-trash-o "></i> 削除'), admin_admin_user_path(admin_user), method: :delete, data: { confirm: t('messages.destroy_confirm') }, class: 'btn btn-app bg-red'  %>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm pull-right">
+              <%= paginate @admin_users %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+<div class="box box-default">
+  <%= nested_form_for @query, as: :query, url: admin_admin_users_path, method: :get do |f| %>
+      <div class="box-header with-border">
+        <h3 class="box-title"><%= @admin_users.total_count %> 件</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+      </div>
+      <div class="box-body" style="">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="form-group row">
+              <label for="example-search-input" class="col-sm-3 col-form-label"><%= AdminUser.human_attribute_name :email %></label>
+              <div class="col-sm-9">
+                <%= f.email_field :email, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-sm-3 col-form-label"><%= AdminUser.human_attribute_name :login_code %></label>
+              <div class="col-sm-9">
+                <%= f.email_field :name, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="box-header">
+            <%= link_to '新規作成', new_admin_admin_user_path, class: 'btn btn-primary btn-lg' %>
+
+            <%= f.submit '検索', class: 'btn btn-primary btn-lg bg-olive' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

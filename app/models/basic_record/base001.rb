@@ -42,7 +42,7 @@ class BasicRecord::Base001 < ActiveRecord::Base
 	def available_human() available? ? "◯" : "×" end
 	def available_human_html() self.class.human_html(available_human) end
 
-	def deleted?()      deleted != self.class._alive_at_ end
+	def deleted?()      deleted != self.class._alive_ end
 	def deleted_human() deleted? ? "" : t("admin.misc.remove") end
 
 	def alive?()      deleted.to_i == self.class._alive_ end
@@ -177,21 +177,21 @@ class BasicRecord::Base001 < ActiveRecord::Base
 		def _unavailable_() 0; end
 		def _available_()   1; end
 
-		def _alive_at_()  nil; end
-		def _deleted_()  'deleted IS NOT NULL'; end
+		def _alive_()  0; end
+		def _deleted_()  1; end
 		def available_choices
 			[["表示",_available_],["非表示",_unavailable_]]
 		end
 
 		def unavailable_records
-			where(available: _unavailable_,deleted: _alive_at_)
+			where(available: _unavailable_,deleted: _alive_)
 		end
 		def available_record(opt={})
-			find_by(opt.merge({available: _available_,deleted: _alive_at_}))
+			find_by(opt.merge({available: _available_,deleted: _alive_}))
 		end
 
 		def available_records
-			where(available: _available_,deleted: _alive_at_)
+			where(available: _available_,deleted: _alive_)
 		end
 
 		def deleted_records
@@ -199,24 +199,24 @@ class BasicRecord::Base001 < ActiveRecord::Base
 		end
 
 		def published_records
-			where(is_published: true,deleted: _alive_at_)
+			where(is_published: true,deleted: _alive_)
 		end
 
 		def alive_record(opt={})
-			find_by(opt.merge({deleted: _alive_at_}))
+			find_by(opt.merge({deleted: _alive_}))
 		end
 
 		def alive_record_or_initialize_by(opt={})
-			find_or_initialize_by(opt.merge({deleted: _alive_at_}))
+			find_or_initialize_by(opt.merge({deleted: _alive_}))
 		end
 
 		def alive_records
-			where(deleted: _alive_at_)
+			where(deleted: _alive_)
 		end
 
 		def find_email(email)
 			return nil if email.blank?
-			return find_by(email: email, deleted: _alive_at_)
+			return find_by(email: email, deleted: _alive_)
 		end
 
 		def hash_password(password, salt, magic=auth_magic)

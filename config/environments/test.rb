@@ -39,4 +39,13 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  IP_RESTRICTION_FOR_ADMIN = false
+  ALLOW_IP_FOR_ADMIN       = ['127.0.0.1',
+                              '36.12.7.134', # 佐藤
+  ]
+  ARTICLE_MAINTE_MODE      = false
+  MAINTE_MODE              = false
+  MAINTE_ALLOW_IP          = ALLOW_IP_FOR_ADMIN
+  ROOT_PATH                = 'tourism.com'
 end

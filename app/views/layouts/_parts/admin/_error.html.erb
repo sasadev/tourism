@@ -1,0 +1,10 @@
+<!--<h1 class="hL"><%= @title || t("views.admin.#{controller_name}.title") %></h1>-->
+<% instance_val = @instance || eval("@#{controller_name.singularize}") %>
+<% if instance_val && instance_val.errors.any? %>
+    <dl class="boxErr">
+      <dt class="boxTtl">入力に誤りがあります。ご確認下さい。</dt>
+      <dd class="boxCts">
+        <%= instance_val.errors.full_messages.join("<br/>").html_safe %>
+      </dd>
+    </dl>
+<% end %>

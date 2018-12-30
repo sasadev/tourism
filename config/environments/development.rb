@@ -51,4 +51,11 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  IP_RESTRICTION_FOR_ADMIN = false
+  ALLOW_IP_FOR_ADMIN       = ['127.0.0.1']
+  ARTICLE_MAINTE_MODE      = false
+  MAINTE_MODE              = false
+  MAINTE_ALLOW_IP          = ALLOW_IP_FOR_ADMIN
+  ROOT_PATH                = 'localhost:8080'
 end
