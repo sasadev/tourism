@@ -45,5 +45,7 @@ Rails.application.routes.draw do
 
   scope module: 'front' do
     root 'page#index'
+
+    get :tour_select, controller: :contents, action: :tour_select
   end
 end

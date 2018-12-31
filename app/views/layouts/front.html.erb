@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="sayit_transparent_header sayit_sticky_menu_on sayit_page_mode_standard">
 <head>
-  <title>Home - Sayit</title>
+  <title>Tourism</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +10,13 @@
 
   <!-- CSS Files -->
   <%= stylesheet_link_tag 'front/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'front/owl.carousel.css' if controller_name == 'contents' %>
   <%= javascript_include_tag 'front/application' %>
 </head>
 
 <body class="sayit_js_bg_color" data-bgcolor="#ffffff">
 <!-- Additional Sidebar -->
+<% if false %>
 <div class="sayit_additional_sidebar_cont">
   <a class="sayit_additional_sidebar_close_button" href="javascript:void(0)"><i class="fa fa-times"></i></a>
 
@@ -93,6 +95,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <div class="sayit_additional_overlay"></div>
 
 <!-- Header -->
@@ -112,6 +115,7 @@
       </div>
     </div>
 
+    <% if false %>
     <div class="col sayit_menu_container col-8">
       <div class="sayit_menu_cont">
         <div class="sayit_additional_button_cont">
@@ -210,6 +214,7 @@
         </div>
       </div>
     </div>
+    <% end %>
   </div>
 
   <div class="sayit_menu_mobile">
@@ -284,382 +289,7 @@
 <div class="sayit_empty_item"></div>
 
 <!-- Content -->
-<div class="sayit_container content_box_wide sayit_no_sidebar">
-  <div class="row sayit_no_sidebar">
-    <div class="col col-12 sayit_content content_box_bg_color_off">
-      <div class="sayit_tiny">
-        <!-- Post Slider -->
-        <div class="sayit_fullwidth_block">
-          <div class="sayit_post_slider_widget">
-            <div class="sayit_widget_container">
-              <div class="sayit_post_slider_cont">
-                <div class="sayit_post_slider_wrapper" id="sayit_post_slider_123344" data-autoplay="off" data-pause="yes" data-speed="8000" data-default-height="800">
-                  <!-- Item 1 -->
-                  <div class="sayit_post_slider_item item_1" data-number="1">
-                    <div class="sayit_slider_item_wrapper sayit_js_bg_image" data-src="/images/front/clipart/post_slider/img-1.jpg">
-                      <div class="sayit_overlay"></div>
-
-                      <div class="sayit_post_meta_cont">
-                        <div class="sayit_post_category_cont">
-                          <a href="#">France</a>
-                        </div>
-
-                        <h2 class="sayit_post_title"><a href="post_standard.html">Wonderful Rural Nature</a></h2>
-
-                        <div class="sayit_post_slider_nav_buttons_cont">
-                          <a class="sayit_prev_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_0" data-number="0"><i class="fa fa-angle-left"></i></a>
-                          <a class="sayit_next_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_2" data-number="2"><i class="fa fa-angle-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Item 2 -->
-                  <div class="sayit_post_slider_item item_2" data-number="2">
-                    <div class="sayit_slider_item_wrapper sayit_js_bg_image" data-src="/images/front/clipart/post_slider/img-2.jpg">
-                      <div class="sayit_overlay"></div>
-
-                      <div class="sayit_post_meta_cont">
-                        <div class="sayit_post_category_cont">
-                          <a href="#">France</a>
-                        </div>
-
-                        <h2 class="sayit_post_title"><a href="post_image.html">Lovely Dinner</a></h2>
-
-                        <div class="sayit_post_slider_nav_buttons_cont">
-                          <a class="sayit_prev_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_1" data-number="1"><i class="fa fa-angle-left"></i></a>
-                          <a class="sayit_next_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_3" data-number="3"><i class="fa fa-angle-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Item 3 -->
-                  <div class="sayit_post_slider_item item_3" data-number="3">
-                    <div class="sayit_slider_item_wrapper sayit_js_bg_image" data-src="/images/front/clipart/post_slider/img-3.jpg">
-                      <div class="sayit_overlay"></div>
-
-                      <div class="sayit_post_meta_cont">
-                        <div class="sayit_post_category_cont">
-                          <a href="#">France</a>
-                        </div>
-
-                        <h2 class="sayit_post_title"><a href="post_video.html">About Public Transport</a></h2>
-
-                        <div class="sayit_post_slider_nav_buttons_cont">
-                          <a class="sayit_prev_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_2" data-number="2"><i class="fa fa-angle-left"></i></a>
-                          <a class="sayit_next_post_slide_button sayit_inner_post_slide_button" href="javascript:void(0)" data-slide=".item_4" data-number="4"><i class="fa fa-angle-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Slider Navigation -->
-                  <div class="sayit_post_slider_nav">
-                    <a class="sayit_post_slider_nav_button button_1" href="javascript:void(0)" data-slide=".item_1"></a>
-                    <a class="sayit_post_slider_nav_button button_2" href="javascript:void(0)" data-slide=".item_2"></a>
-                    <a class="sayit_post_slider_nav_button button_3" href="javascript:void(0)" data-slide=".item_3"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sayit_mb_160 sayit_sm_mb_60"></div>
-
-        <div class="row gutters">
-          <div class="col col-6 sayit_pr_15">
-            <h2 class="sayit_mb_20">In Search of Great Adventures</h2>
-
-            <p>Nunc laoreet nunc ac vulputate tincidunt. Cras pellentesque eros justo, sed mattis quam dignissim ut. Vivamus euismod dapibus pretium. Phasellus a interdum leo. Proin pretium enim metus, ac iaculis quam placerat quis. Aliquam iaculis, mi non molestie aliquam. Pellentesque sed ipsum congue, laoreet erat vitae, dignissim metus.</p>
-
-            <p class="sayit_mb_40">Sed eu magna quam. Vivamus euismod dapibus pretium. Phasellus a interdum leo. Pellentesque sed ipsum congue, laoreet erat vitae, dignissim metus. Proin pretium enim metus, ac iaculis quam placerat quis. Aliquam iaculis, mi non molestie aliquam.</p>
-
-            <div class="sayit_popup_button_widget">
-              <div class="sayit_widget_container sayit_mb_50">
-                <div class="sayit_popup_button_wrapper">
-                  <div class="sayit_popup_button_popup">
-                    <div class="sayit_popup_button_popup_close"></div>
-
-                    <div class="sayit_popup_button_content_cont">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere egestas purus, id molestie nisl dignissim eu. Donec malesuada in tortor id luctus. Nulla hendrerit lectus at mattis vestibulum. Integer eget tristique ante, id ullamcorper ligula. Nam quis ipsum eget dui elementum dapibus. Vivamus vehicula rhoncus viverra. Ut at convallis nisi, vitae sagittis arcu. Duis a vulputate felis. Fusce cursus felis libero, eget eleifend tellus laoreet a. Morbi semper turpis ac sapien lacinia faucibus. Vivamus nisl enim, finibus non dignissim nec, fermentum ac lacus. Phasellus scelerisque imperdiet magna ac aliquet. Integer id finibus lacus. Sed vitae ligula eu quam sodales rhoncus. Praesent facilisis egestas neque eget hendrerit. Sed magna elit, aliquet sit amet finibus sit amet, hendrerit vel velit.</p>
-                      <br>
-                      <p>Nunc laoreet nunc ac vulputate tincidunt. Cras pellentesque eros justo, sed mattis quam dignissim ut. Pellentesque sed ipsum congue, laoreet erat vitae, dignissim metus. Nulla et commodo velit. Mauris efficitur turpis sit amet sem accumsan iaculis. Donec efficitur ligula eu metus convallis, eu aliquam augue viverra. Donec eros mi, ornare ac sapien in, consectetur porttitor ipsum. Nam congue augue diam, in finibus odio blandit sed. Aenean maximus ullamcorper arcu, in tempus nunc mattis id. Phasellus efficitur risus pellentesque, scelerisque urna ut, faucibus mi. Nam in aliquam ante. Quisque dignissim elit vitae molestie eleifend. Proin pretium odio fringilla ligula fringilla, ac commodo.</p>
-                      <br>
-                      <p>Fusce in condimentum lorem. Donec eros urna, ultrices et molestie et, laoreet a arcu. Sed sit amet lacus et risus consectetur ullamcorper. Nullam lacinia felis non mauris tincidunt, id elementum urna rhoncus. Morbi ac hendrerit erat, id rutrum sapien. Aenean vulputate nec orci vel euismod. Nullam varius vitae dolor quis pretium. Donec placerat libero quis neque placerat iaculis. Etiam ultricies iaculis eros ut iaculis. Donec vestibulum, risus nec iaculis euismod, nisi ligula euismod sem, id eleifend lectus quam nec ex. Cras maximus justo orci. Aenean tincidunt euismod tortor, quis commodo mi cursus a. Etiam dapibus dolor ac magna vestibulum, eget condimentum massa pulvinar.</p>
-                    </div>
-                  </div>
-
-                  <a class="sayit_popup_button" href="javascript:void(0)">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col col-6 sayit_pl_15 sayit_md_padding_0 sayit_md_mb_40">
-            <img src="/images/front/clipart/adventures.jpg" alt="" />
-          </div>
-        </div>
-
-        <div class="sayit_mb_100 sayit_sm_mb_40"></div>
-
-        <!-- Info Boxes -->
-        <div class="row">
-          <div class="col col-6 push-center">
-            <div class="sayit_widget_title">
-              <div class="sayit_widget_container sayit_text_align_center sayit_mb_60">
-                <h2 class="sayit_element_heading sayit_view_type_1">Enjoy of My Latest Travels</h2>
-                <p class="sayit_subtitle_cont">Mauris efficitur turpis sit amet sem accumsan iaculis. Vivamus nec dolor convallis, viverra urna at, fermentum nulla.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row gutters">
-          <!-- Info Box 1 -->
-          <div class="col col-4 sayit_pr_10 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_usa.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-1.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">United States of America</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Box 2 -->
-          <div class="col col-4 sayit_pr_5 sayit_pl_5 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_india.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-2.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">India</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Box 3 -->
-          <div class="col col-4 sayit_pl_10 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_germany.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-3.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">Germany</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Box 4 -->
-          <div class="col col-4 sayit_pr_10 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_turkey.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-4.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">Turkey</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Box 5 -->
-          <div class="col col-4 sayit_pl_5 sayit_pr_5 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_uk.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-5.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">United Kingdom</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Box 6 -->
-          <div class="col col-4 sayit_pl_10 sayit_mb_40 sayit_md_padding_0 sayit_md_mb_40">
-            <div class="sayit_info_box_widget">
-              <div class="sayit_widget_container">
-                <div class="sayit_info_box_item view_type_3">
-                  <a href="places_france.html">
-                    <div class="sayit_info_box_item_inner sayit_js_bg_image sayit_parallax_mode sayit_mobile_height_380" data-src="/images/front/clipart/info_box/info-6.jpg" data-tilt data-tilt-easing="linear" data-tilt-max="20">
-                      <div class="sayit_inbo_box_content sayit_no_description">
-                        <div class="sayit_info_box_title sayit_text_align_center">
-                          <h3 class="sayit_js_color" data-color="#ffffff">France</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sayit_mb_120 sayit_sm_mb_60"></div>
-
-        <!-- Socials -->
-        <div class="row gutters">
-          <div class="col col-6">
-            <img src="/images/front/clipart/socials.jpg" alt="" class="sayit_md_mb_15" />
-          </div>
-
-          <div class="col col-6 sayit_pl_20 sayit_md_padding_0">
-            <div class="sayit_widget_title">
-              <div class="sayit_widget_container sayit_text_align_center sayit_mb_27 sayit_mt_20">
-                <h2 class="sayit_element_heading sayit_view_type_1">Feel Free to Visit My Socials</h2>
-              </div>
-            </div>
-
-            <p class="sayit_text_align_center sayit_mb_45">Nunc laoreet nunc ac vulputate tincidunt. Cras pellentesque eros justo, sed dignissim ut. Nunc laoreet nunc ac vulputate tincidunt. Pellentesque sed ipsum congue, laoreet erat vitae. Donec efficitur ligula eu metus. Nulla et commodo velit. Mauris efficitur turpis sit amet sem accumsan iaculis. Donec efficitur ligula eu metus. Nulla et commodo velit. Mauris efficitur turpis sit amet sem accumsan iaculis. Donec efficitur ligula eu metus. </p>
-
-            <div class="sayit_social_icons_widget">
-              <div class="sayit_widget_container sayit_text_align_center">
-                <a class="sayit_social_icon" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                <a class="sayit_social_icon" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                <a class="sayit_social_icon" href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
-                <a class="sayit_social_icon" href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sayit_mb_140 sayit_sm_mb_60"></div>
-
-        <!-- Featured Posts -->
-        <div class="row">
-          <div class="col col-6 push-center">
-            <div class="sayit_widget_title">
-              <div class="sayit_widget_container sayit_text_align_center sayit_mb_60">
-                <h2 class="sayit_element_heading sayit_view_type_1">See My Favorite Travels</h2>
-                <p class="sayit_subtitle_cont">Mauris efficitur turpis sit amet sem accumsan iaculis. Vivamus nec dolor convallis, viverra urna at, fermentum nulla.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sayit_featured_posts_widget">
-          <div class="sayit_widget_container sayit_mb_10">
-            <div class="sayit_featured_posts sayit_items_3">
-              <!-- Item 1 -->
-              <div class="sayit_posts_item">
-                <div class="sayit_fimage_cont">
-                  <a href="post_standard.html">
-                    <img src="/images/front/clipart/recent_posts/img-1.jpg" alt="">
-                  </a>
-                </div>
-
-                <div class="sayit_meta_cont">
-                  <div class="sayit_post_category">
-                    <a href="#">Turkey</a>
-                  </div>
-
-                  <span>/</span>
-
-                  <div class="sayit_post_date">July 11, 2018</div>
-                </div>
-
-                <h4 class="sayit_post_title">
-                  <a href="post_standard.html">Pretium Dui Diam Vitae Urna</a>
-                </h4>
-
-                <div class="sayit_excerpt">Proin vehicula odio ac vehicula aliquet. Nullam dolor augue, suscipit eget odio sed, auctor vestibulum urna. Duis sit amet quam vel sem...</div>
-              </div>
-
-              <!-- Item 2 -->
-              <div class="sayit_posts_item">
-                <div class="sayit_fimage_cont">
-                  <a href="post_image.html">
-                    <img src="/images/front/clipart/recent_posts/img-2.jpg" alt="">
-                  </a>
-                </div>
-
-                <div class="sayit_meta_cont">
-                  <div class="sayit_post_category">
-                    <a href="#">Italy</a>
-                  </div>
-
-                  <span>/</span>
-
-                  <div class="sayit_post_date">July 11, 2018</div>
-                </div>
-
-                <h4 class="sayit_post_title">
-                  <a href="post_standard.html">Etiam Luctus Ac Neque Vel Sollicitudin</a>
-                </h4>
-
-                <div class="sayit_excerpt">Ut nulla tortor, condimentum in magna vitae, porttitor auctor sem. Cras consectetur diam id velit euismod egestas. Nunc sodales, est...</div>
-              </div>
-
-              <!-- Item 3 -->
-              <div class="sayit_posts_item">
-                <div class="sayit_fimage_cont">
-                  <a href="post_video.html">
-                    <img src="/images/front/clipart/recent_posts/img-3.jpg" alt="">
-                  </a>
-                </div>
-
-                <div class="sayit_meta_cont">
-                  <div class="sayit_post_category">
-                    <a href="#">Germany</a>
-                  </div>
-
-                  <span>/</span>
-
-                  <div class="sayit_post_date">July 10, 2018</div>
-                </div>
-
-                <h4 class="sayit_post_title">
-                  <a href="post_standard.html">Mauris Feugiat Arcu Dolor Praesent</a>
-                </h4>
-
-                <div class="sayit_excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sodales enim, et viverra est. Aenean ac enim nulla. Nunc auctor...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sayit_mb_78 sayit_sm_mb_0"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= yield %>
 
 <!-- Footer -->
 <div class="sayit_footer">
@@ -851,6 +481,8 @@
 <%= javascript_include_tag 'front/jquery.min.js',
                            'front/vanilla-tilt.min.js',
                            'front/main.js' %>
+
+<%= javascript_include_tag 'front/owl.carousel.min.js' if controller_name == 'contents' %>
 <%= yield :javascripts %>
 </body>
 </html>
