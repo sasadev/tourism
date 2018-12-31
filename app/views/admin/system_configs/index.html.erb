@@ -1,0 +1,36 @@
+<%= form_tag(admin_system_configs_path, :multipart => true) do %>
+    <section class="content">
+      <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">郵便番号データ取り込み</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <br>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group row">
+                <label for="example-text-input" class="col-sm-2 col-form-label"><%= ZipList.model_name.human %></label>
+                <div class="col-sm-4">
+                  <%= file_field_tag :zip_source %>
+                </div>
+                <div class="col-sm-6">
+                  <%= link_to '日本郵便からCSVをダウンロード', 'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip', class: 'btn btn-primary btn-lg' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+                <%= button_tag type: 'submit', class: 'btn btn-app bg-olive' do %>
+                    <i class="fa fa-save"></i>保存
+                <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+<% end %>
+

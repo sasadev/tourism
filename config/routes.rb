@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
     get root 'page#index'
 
@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     resources :admin_users
 
     # コンテンツ
-    resources :contents
+    resources :contents do
+      match :zip_search, via: [:get, :post, :patch], on: :collection
+      get :mod_category, on: :collection
+    end
 
     # カテゴリ
     resources :categories do
@@ -34,5 +37,9 @@ Rails.application.routes.draw do
     resources :preferences do
       match :sort, via: [:get, :post], on: :collection
     end
+
+    get  'system_configs', controller: :system_configs, to: "system_configs#index"
+    put  'system_configs', controller: :system_configs, to: "system_configs#update"
+    post 'system_configs', controller: :system_configs, to: "system_configs#import_zip_list"
   end
 end

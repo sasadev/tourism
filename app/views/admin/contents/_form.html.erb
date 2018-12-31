@@ -1,0 +1,228 @@
+<%= nested_form_for [:admin, @content] do |f| %>
+
+      <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group row">
+                <label for="example-search-input" class="col-sm-2 col-form-label"><%= Content.human_attribute_name :title %></label>
+                <div class="col-sm-10 <%= 'has-danger' if @content.errors[:title].present? %>">
+                  <%= f.text_field :title, class: 'form-control' %>
+                  <p style="color: red;"><%= @content.error_messages_for :title %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label Category.model_name.human, class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-3 <%= 'has-danger' if f.object.errors[:category_id].present? %>">
+              <%= f.select :category_id, Category.alive_records.pluck(:title, :id), {include_blank: true}, class: 'form-control',
+                             onchange: remote_function(url: mod_category_admin_contents_path(@content),
+                                                       submit: "content-form",
+                                                       update: "content-form"
+                             )
+              %>
+              <p style="color: red;"><%= f.object.error_messages_for :category_id %></p>
+            </div>
+          </div>
+
+          <% if @category.present? %>
+              <div class="form-group row">
+                <%= f.label Genre.model_name.human, class: "col-sm-2 col-form-label" %>
+                <div class="col-sm-3 <%= 'has-danger' if f.object.errors[:genre_id].present? %>">
+                  <%= f.collection_select :genre_id,
+                                          @category.genres.alive_records,
+                                          :id,
+                                          :title,
+                                          { },
+                                          { class: 'form-control select2 mr-2' } %>
+                  <p style="color: red;"><%= f.object.error_messages_for :genre_id %></p>
+                </div>
+              </div>
+          <% end %>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group row">
+                <label for="example-text-input" class="col-sm-2 col-form-label"><%= Content.human_attribute_name :main_image %></label>
+                <% if f.object.main_image? %>
+                    <div class="col-sm-10 <%= 'has-danger' if @content.errors[:main_image].present? %>">
+                      <%= image_tag f.object.main_image.content.url %>
+                    </div>
+                    <% if f.object.persisted? %>
+                        <td class="uk-width-2-10 uk-text-center">
+                          <%= f.check_box :remove_main_image, data: {'md-icheck': true}  %>
+                        </td>
+                    <% end %>
+                <% end %>
+                <div class="col-sm-10">
+                  <%= f.file_field :main_image, accept: 'image/jpeg,image/gif,image/png' %>
+                </div>
+                <%= f.check_box :remove_main_image, data: {'md-icheck': true}  %>
+                <%= f.hidden_field :main_image_cache %>
+              </div>
+              <p style="color: red;"><%= @content.error_messages_for :main_image %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :description, Content.human_attribute_name(:description), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:content].present? %>">
+              <%= f.cktext_area :description, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
+              <p style="color: red;"><%= @content.error_messages_for :description %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :time_required, Content.human_attribute_name(:time_required), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-3 <%= 'has-danger' if @content.errors[:time_required].present? %>">
+              <%= f.text_field :time_required, class: 'form-control', min: 0, data: {'validation-required-message': 'This field is required'}  %>
+              <p>※数字で入力してください</p>
+              <p style="color: red;"><%= @content.error_messages_for :time_required %></p>
+            </div>
+            <%= f.label :time_required, '分', class: 'col-form-label' %>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12 ml-auto">
+              <%= f.label :activity, class: 'col-sm-2 col-form-label' %>
+              <% Content.activities_i18n.each_with_index do |(activity, ja), i| %>
+                  <%= f.radio_button :activity, activity, checked: f.object.activity == activity %>
+                  <%= f.label :"activity_#{activity}", ja %>
+              <% end %>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="form-group row">
+            <label for="location3" class="col-sm-2 col-form-label"><%= Content.human_attribute_name :period %></label>
+            <div class="col-sm-3 <%= 'has-danger' if @content.errors[:period_from].present? %>">
+              <%= f.text_field :period_from, class: 'form-control date-picker' %>
+              <p style="color: red;"><%= @content.error_messages_for :period_from %></p>
+            </div>
+            <span>~</span>
+            <div class="col-sm-3 <%= 'has-danger' if @content.errors[:period_to].present? %>">
+              <%= f.text_field :period_to, class: 'form-control date-picker' %>
+              <p style="color: red;"><%= @content.error_messages_for :period_to %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :recommended, Content.human_attribute_name(:recommended), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:recommended].present? %>">
+              <%= f.text_area :recommended, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
+              <p style="color: red;"><%= @content.error_messages_for :recommended %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :zip, Content.human_attribute_name(:zip), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-2 <%= 'has-danger' if @content.errors[:zip].present? %>">
+              <%= f.text_field :zip, maxlength: 7, class: 'form-control', data: { 'validation-required-message': 'This field is required' } %>
+              <p style="color: red;"><%= @content.error_messages_for :zip %></p>
+            </div>
+                <span class="formComm">
+                  <%= link_to_remote raw("<button type=\"button\" class=\"btn btn-secondary\" >検索</button>"),{
+                      :url =>      zip_search_admin_contents_path,
+                      :method => "POST",
+                      :loading => true,
+                      :submit => "content-form"
+                  },{ class: "",id: "zip_search"}
+                  %>
+                </span>
+            <script>
+              $('#content_zip').keyup(function(e){
+                var content_zip = $('#content_zip').val();
+                if (content_zip.length == 7) {
+                  $('#zip_search')[0].click();
+                }
+              });
+            </script>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :prefecture_id, Content.human_attribute_name(:prefecture_id), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-2 <%= 'has-danger' if @content.errors[:prefecture_id].present? %>">
+              <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {}, class: 'form-control' %>
+              <p style="color: red;"><%= @content.error_messages_for :prefecture_id %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :address, Content.human_attribute_name(:address), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:address].present? %>">
+              <%= f.text_field :address, class: 'form-control', data: { 'validation-required-message': 'This field is required' } %>
+              <p style="color: red;"><%= @content.error_messages_for :address %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :building, Content.human_attribute_name(:building), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:building].present? %>">
+              <%= f.text_field :building, class: 'form-control', data: { 'validation-required-message': 'This field is required' } %>
+              <p style="color: red;"><%= @content.error_messages_for :building %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :memo, Content.human_attribute_name(:memo), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:memo].present? %>">
+              <%= f.text_area :memo, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
+              <p style="color: red;"><%= @content.error_messages_for :memo %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :amount, Content.human_attribute_name(:amount), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-3 <%= 'has-danger' if @content.errors[:amount].present? %>">
+              <%= f.text_field :amount, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
+              <p>※数字で入力してください</p>
+              <p style="color: red;"><%= @content.error_messages_for :amount %></p>
+            </div>
+            <%= f.label :amount, '円', class: 'col-form-label' %>
+          </div>
+
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title"><%= ContentImage.model_name.human %></h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <%= f.fields_for :content_images %>
+              <%= f.link_to_add raw("<i class=\"fa fa-plus\"></i> #{ContentImage.model_name.human}を追加"), :content_images, class: 'btn bg-red' %>
+            </div>
+          </div>
+
+          <div class="pull-right">
+            <%= link_to raw('<i class="fa fa-indent"></i> 一覧'), admin_contents_path, class: 'btn btn-app bg-blue' %>
+            <%= button_tag type: 'submit', class: 'btn btn-app bg-olive' do %>
+                <i class="fa fa-save"></i> 登録
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+<% end %>
+
+
+<script>
+  $(function() {
+    $('.date-picker').datepicker({
+      format: 'yyyy-mm-dd',
+      language: 'ja'
+    });
+  });
+</script>

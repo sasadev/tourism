@@ -26,12 +26,16 @@ ja:
           edit: 例
       page:
         title: トップ
-        content_preference: コンテンツ設定
+        content_preference: 各種設定
         actions:
           <<: *default
           login: ログイン
       admin_users:
         title: アカウント管理
+        actions:
+          <<: *default
+      contents:
+        title: コンテンツ管理
         actions:
           <<: *default
       categories:
@@ -52,6 +56,10 @@ ja:
           <<: *default
       preferences:
         title: 好み管理
+        actions:
+          <<: *default
+      system_configs:
+        title: 郵便番号取り込み
         actions:
           <<: *default
       system_mail_conditions:

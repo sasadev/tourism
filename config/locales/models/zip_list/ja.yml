@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      zip_list: 郵便番号データ
+    attributes:
+      zip_list:
+        id: ID
+        pref: 県
+        city: 市
+        town: 町
+        pref_kana: 県カタカナ
+        city_kana: 市カタカナ
+        town_kana: 町カタカナ

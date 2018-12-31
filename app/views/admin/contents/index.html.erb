@@ -1,0 +1,38 @@
+  <%= render partial: 'search_form' %>
+  <div class="row">
+    <div class="col-12">
+      <div class="box">
+        <div class="box-header">
+        </div>
+        <div class="box-body no-padding">
+          <table class="table table-bordered table-responsive">
+            <tr>
+              <th><%= Content.human_attribute_name :main_image %></th>
+              <th><%= Content.human_attribute_name :title %></th>
+              <th><%= Content.human_attribute_name :category_id %></th>
+              <th><%= Content.human_attribute_name :genre_id %></th>
+              <th></th>
+            </tr>
+            <% @contents.each.with_index(1) do |content, i| %>
+                <tr style="line-height: 65px;">
+                  <td><%= image_tag content&.main_image.thumb.url %></td>
+                  <td><%= content.title %></td>
+                  <td><%= content.category&.title %></td>
+                  <td><%= content.genre&.title %></td>
+                  <td colspan="2">
+                    <%= link_to raw('<i class="fa fa-edit"></i> 編集'), edit_admin_content_path(content), class: 'btn btn-app bg-blue' %>
+                    <%= link_to raw('<i class="fa fa-trash-o "></i> 削除'), admin_content_path(content), method: :delete, data: { confirm: t('messages.destroy_confirm') }, class: 'btn btn-app bg-red'  %>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm pull-right">
+              <%= paginate @contents %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

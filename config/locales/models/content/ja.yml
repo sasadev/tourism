@@ -1,0 +1,55 @@
+ja:
+  activerecord:
+    models:
+      content: コンテンツ
+    attributes:
+      content:
+        id: ID
+        title: コンテンツ名
+        main_image: メイン画像
+        description: 説明
+        time_required: 所要時間
+        activity: 室内外
+        period: 開催期間
+        period_from: 開催期間from
+        period_to: 開催期間to
+        recommended: おすすめポイント
+        zip: 郵便番号
+        address: 住所
+        building: 建物名
+        memo: メモ
+        amount: 価格
+        prefecture_id: 都道府県
+        category_id: カテゴリ
+        genre_id: ジャンル
+        content_image_id: ジャンル
+        created_at: 作成日時
+        updated_at: 更新日時
+      content/content_images:
+        image: 画像
+    flash:
+      content:
+        actions:
+          create:
+            success: コンテンツの登録を完了しました。
+            failure:  入力を修正してください。
+          update:
+            success:  コンテンツの更新を完了しました。
+            failure:  入力を修正してください。
+          destroy:
+            success:  コンテンツの削除を完了しました。
+            failure:  コンテンツを削除できません。
+          cancel:
+            success:  コンテンツのキャンセルを完了しました。
+            failure:  コンテンツをキャンセルできません。
+          suspend:
+            success:  コンテンツを無効にしました。
+          activate:
+            success:  コンテンツを有効にしました。
+          login:
+            failure:  ログインコードまたはパスワードが一致しません。
+  enums:
+    content:
+      activity:
+        indoor: インドア
+        outdoor: アウトドア
