@@ -42,4 +42,8 @@ Rails.application.routes.draw do
     put  'system_configs', controller: :system_configs, to: "system_configs#update"
     post 'system_configs', controller: :system_configs, to: "system_configs#import_zip_list"
   end
+
+  scope module: 'front' do
+    root 'page#index'
+  end
 end
