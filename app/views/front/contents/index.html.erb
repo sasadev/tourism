@@ -1,0 +1,131 @@
+<!-- Title Block -->
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/back-7.jpg" data-height="800">
+  <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
+
+  <div class="sayit_title_wrapper col push-middle">
+    <h1 class="sayit_post_title">Tourist Spot </h1>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="sayit_container content_box_narrow sayit_right_sidebar">
+  <div class="row sayit_right_sidebar">
+    <!-- Content Area -->
+    <div class="col col-8 sayit_content content_box_bg_color_off" style="margin-top: 60px;">
+      <div class="sayit_tiny">
+        <!-- Widget Blog Listing -->
+        <div class="sayit_blog_listing_widget">
+          <div class="sayit_widget_container">
+            <% if false %>
+                <p style="text-align: center;">
+                  <% Category.alive_records.each do |category| %>
+                      <button class="btn" type="button" style="background-color: <%= category.color %>"><%= category.title %></button>
+                  <% end %>
+                </p>
+            <% end %>
+            <div class="sayit_blog_listing_cont sayit_blog_listing_cont_1534 sayit_columns_3 sayit_blog_type_grid">
+              <!-- Item 1 -->
+              <% @contents.each do |content| %>
+                  <div class="sayit_blog_item">
+                    <div class="sayit_blog_item_wrapper">
+                      <div class="sayit_blog_item_fimage">
+                        <%= link_to tour_select_path(content) do %>
+                            <% if content&.main_image.present? %>
+                                <% image_tag content&.main_image.content.url %>
+                            <% else %>
+                                <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
+                            <% end %>
+                        <% end %>
+                      </div>
+                      <div class="sayit_meta">
+                        <div class="sayit_post_categories">
+                          <!--<a href="#">Germany</a>-->
+                          <%= content.category&.title %>
+                        </div>
+
+                        <span>/</span>
+
+                        <div class="sayit_post_date">
+                          <%= content&.the_time_required %>
+                        </div>
+                      </div>
+
+                      <h4 class="sayit_post_title">
+                        <%= link_to content&.title, tour_select_path(content) %>
+                      </h4>
+
+                      <div class="sayit_post_excerpt index_description">
+                        <p><%= content&.index_description %></p>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+
+            <div class="sayit_blog_listing_pagination">
+              <nav class="navigation pagination">
+                <div class="nav-links">
+                  <%= paginate @contents, theme: 'front' %>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Area -->
+    <div class="sayit_sidebar col col-4" style="margin-top: 60px;">
+      <div class="widget widget_categories">
+        <h6 class="widgettitle"><span>Categories</span></h6>
+
+        <ul>
+          <% Category.alive_records.order(sort_seq: :asc).each do |category| %>
+              <li>
+                <% params[:query][:category_id] = category.id %>
+                <%= link_to tour_selects_path(query: params[:query]) do %>
+                    <%= category.title %>
+                <% end %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <%= nested_form_for @query, as: :query, url: tour_selects_path, method: :get do |f| %>
+          <!-- Search Widget -->
+          <%= hidden_field_tag 'query[category_id]',@query.category_id %>
+          <div class="widget widget_search">
+            <h6 class="widgettitle"><span>Search</span></h6>
+            <div class="margin-bottom-20">
+              <label><%= Content.human_attribute_name :title %></label>
+              <%= f.text_field :title, class: 'form-control', placeholder: '名称検索' %>
+            </div>
+
+            <div class="margin-bottom-20">
+              <label><%= Content.human_attribute_name :prefecture_id %></label>
+              <%= f.select :prefecture_id, Prefecture.pluck(:name, :id), {include_blank: true}, class: 'form-control' %>
+            </div>
+
+            <div class="margin-bottom-20">
+              <label><%= PriceRange.model_name.human %></label>
+              <%= f.select :price_check, PriceRange.alive_records.pluck(:title, :id), {include_blank: true}, class: 'form-control' %>
+            </div>
+
+            <div class="margin-bottom-20">
+              <label><%= Preference.model_name.human %></label>
+              <ul>
+                <% @query.preference_ids ||= [] %>
+                <% Preference.alive_records.order(sort_seq: :asc).each do |preference| %>
+                    <li>
+                      <%= check_box_tag 'query[preference_ids][]', preference.id, @query.preference_ids.include?(preference.id.to_s), style: 'width: 10%' %>
+                      <%= preference.title %>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+            <%= f.button '検索', type: 'submit' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

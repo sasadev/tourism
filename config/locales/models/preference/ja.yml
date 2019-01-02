@@ -1,11 +1,11 @@
 ja:
   activerecord:
     models:
-      preference: 好み
+      preference: タグ
     attributes:
       preference:
         id: ID
-        title: 好み名
+        title: タグ名
         sort_seq: 並び順
         deleted: 削除済み
         created_at: 作成日時
@@ -14,21 +14,21 @@ ja:
       preference:
         actions:
           create:
-            success: 好みの登録を完了しました。
+            success: タグの登録を完了しました。
             failure:  入力を修正してください。
           update:
-            success:  好みの更新を完了しました。
+            success:  タグの更新を完了しました。
             failure:  入力を修正してください。
           destroy:
-            success:  好みの削除を完了しました。
-            failure:  好みを削除できません。
+            success:  タグの削除を完了しました。
+            failure:  タグを削除できません。
           sort_seq:
-            success:  好みの並び順を変更しました。
-            failure:  好みの並び順の変更時にエラーが起こりました
+            success:  タグの並び順を変更しました。
+            failure:  タグの並び順の変更時にエラーが起こりました
           cancel:
-            success:  好みのキャンセルを完了しました。
-            failure:  好みをキャンセルできません。
+            success:  タグのキャンセルを完了しました。
+            failure:  タグをキャンセルできません。
           suspend:
-            success:  好みを無効にしました。
+            success:  タグを無効にしました。
           activate:
-            success:  好みを有効にしました。
+            success:  タグを有効にしました。

@@ -231,7 +231,7 @@ pre {
     .sayit_container.content_box_wide,
     .sayit_container.content_box_narrow.sayit_right_sidebar,
     .sayit_container.content_box_narrow.sayit_left_sidebar {
-        width: 1600px;
+        width: 1200px;
     }
     
     .sayit_container.content_box_narrow {

@@ -51,6 +51,24 @@
               </div>
           <% end %>
 
+          <div class="form-group row">
+            <%= f.label '', Preference.model_name.human, class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-7 <%= 'has-danger' if @content.errors[:preference_ids].present? %>">
+              <%= f.collection_select :preference_ids, Preference.alive_records, :id, :title, {},
+                                      { class: 'form-control select2 mr-2',
+                                        multiple: true,include_hidden: false } %>
+              <p style="color: red;"><%= @content.error_messages_for :preference_ids %></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-10 ml-auto <%= 'has-danger' if @content.errors[:event].present? %>">
+              <%= f.check_box :event %>
+              <%= f.label :event, Content.human_attribute_name(:event) %>
+              <p style="color: red;"><%= @content.error_messages_for :event %></p>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-12">
               <div class="form-group row">
@@ -80,6 +98,14 @@
             <div class="col-sm-10 <%= 'has-danger' if @content.errors[:content].present? %>">
               <%= f.cktext_area :description, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
               <p style="color: red;"><%= @content.error_messages_for :description %></p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :index_description, Content.human_attribute_name(:index_description), class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-10 <%= 'has-danger' if @content.errors[:index_description].present? %>">
+              <%= f.text_area :index_description, class: 'form-control', data: {'validation-required-message': 'This field is required'}  %>
+              <p style="color: red;"><%= @content.error_messages_for :index_description %></p>
             </div>
           </div>
 

@@ -1,0 +1,49 @@
+<div class="sayit_empty_item"></div>
+
+<!-- Title Block -->
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="<%= @content&.main_image.url %>" data-height="600">
+  <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
+
+  <div class="sayit_title_wrapper col push-middle">
+
+    <h1 class="sayit_post_title"><%= @content&.title %></h1>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="sayit_container content_box_narrow sayit_right_sidebar">
+  <div class="row sayit_right_sidebar">
+    <!-- Content Area -->
+    <div class="col col-12 sayit_content content_box_bg_color_on">
+      <% if @content.content_images.present? %>
+          <div class="sayit_post_formats sayit_pf_image">
+            <div class="sayit_owlCarousel owl-carousel owl-theme">
+              <% @content.content_images.each do |content_image| %>
+                  <div class="item">
+                    <%= image_tag content_image&.image.show.url %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+
+      <div class="sayit_tiny">
+        <%= simple_format(@content&.description) %>
+      </div>
+
+      <!-- Tags Area -->
+      <div class="row align-middle sayit_tags_and_socials_cont">
+        <div class="sayit_post_tags col">
+          <div>
+            <a href="#">Blog</a>
+            <a href="#">City</a>
+            <a href="#">France</a>
+            <a href="#">Travel</a>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+  </div>
+</div>

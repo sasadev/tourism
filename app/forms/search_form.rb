@@ -23,7 +23,7 @@ class SearchForm
 			new(query).search
 		end
 
-		def generate_objects(params = {}, opt = { per: 30 })
+		def generate_objects(params = {}, opt = { per: 15 })
 			retry_ = false
 			begin
 				sql_condition_code = opt[:controller_name]
@@ -38,6 +38,7 @@ class SearchForm
 					end
 					search_form = new(YAML::load(sql_condition.condition))
 				else
+					p params
 					search_form = new(params[:query])
 				end
 
@@ -71,10 +72,16 @@ class SearchForm
 			end
 		end
 
-		private
 		def inherited(child)
-			child._search_model = child.name.gsub('SearchForm', '').constantize
+			# child._search_model = child.name.gsub('SearchForm', '').constantize
+			child._search_model = case child.name
+															when "FrontContentSearchForm" then
+																Content
+															else
+																child.name.gsub('SearchForm', '').constantize
+														end
 		end
+		private
 
 		def define_attribute(*attrs)
 			attrs.each do |attr|

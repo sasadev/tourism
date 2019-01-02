@@ -1,0 +1,9 @@
+<% if page.current? %>
+  <li>
+    <%= content_tag :a, raw("<span>#{page}</span>"), class: 'current', remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+  </li>
+<% end %>

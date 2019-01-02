@@ -8,6 +8,7 @@ ja:
         title: コンテンツ名
         main_image: メイン画像
         description: 説明
+        index_description: 一覧説明文
         time_required: 所要時間
         activity: 室内外
         period: 開催期間
@@ -19,6 +20,7 @@ ja:
         building: 建物名
         memo: メモ
         amount: 価格
+        event: 時事イベント
         prefecture_id: 都道府県
         category_id: カテゴリ
         genre_id: ジャンル

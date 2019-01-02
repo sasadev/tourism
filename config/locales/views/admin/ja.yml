@@ -55,7 +55,7 @@ ja:
         actions:
           <<: *default
       preferences:
-        title: 好み管理
+        title: タグ管理
         actions:
           <<: *default
       system_configs:
