@@ -31,36 +31,43 @@
             <div class="sayit_posts_item" style="width: 30%;">
               <div class="sayit_featured_posts sayit_items_2">
                 <!-- Item 1 -->
-                <% @favorite_contents.each do |favorite_content| %>
-                    <div class="sayit_posts_item" style="width: 50%;">
-                      <div class="sayit_fimage_cont">
-                        <%= link_to tour_select_path(favorite_content) do %>
-                            <% if favorite_content&.main_image.present? %>
-                                <% image_tag favorite_content&.main_image.content.url %>
-                            <% else %>
-                                <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
+                <% if @favorite_contents.present? %>
+                    <% @favorite_contents.each do |favorite_content| %>
+                        <div class="sayit_posts_item" style="width: 50%;">
+                          <div class="sayit_fimage_cont">
+                            <%= link_to tour_select_path(favorite_content) do %>
+                                <% if favorite_content&.main_image.present? %>
+                                    <% image_tag favorite_content&.main_image.content.url %>
+                                <% else %>
+                                    <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
+                                <% end %>
                             <% end %>
-                        <% end %>
-                      </div>
+                          </div>
 
-                      <div class="sayit_meta_cont">
-                        <div class="sayit_post_category">
-                          <%= favorite_content.category&.title %>
+                          <div class="sayit_meta_cont">
+                            <div class="sayit_post_category">
+                              <%= favorite_content.category&.title %>
+                            </div>
+
+                            <span>/</span>
+
+                            <div class="sayit_post_date"><%= favorite_content&.the_time_required %></div>
+                          </div>
+
+                          <h4 class="sayit_post_title">
+                            <%= link_to favorite_content&.title, tour_select_path(favorite_content) %>
+                          </h4>
+
+                          <div class="sayit_excerpt index_description">
+                            <p><%= favorite_content&.index_description %></p>
+                          </div>
+                          <div class="row align-middle sayit_tags_and_socials_cont">
+                            <div class="sayit_post_tags col" style="font-size: 16px;">
+                              <%= link_to '追加する', add_like_destinations_path(content_id: favorite_content), class: 'btn btn-default' %>
+                            </div>
+                          </div>
                         </div>
-
-                        <span>/</span>
-
-                        <div class="sayit_post_date"><%= favorite_content&.the_time_required %></div>
-                      </div>
-
-                      <h4 class="sayit_post_title">
-                        <%= link_to favorite_content&.title, tour_select_path(favorite_content) %>
-                      </h4>
-
-                      <div class="sayit_excerpt index_description">
-                        <p><%= favorite_content&.index_description %></p>
-                      </div>
-                    </div>
+                    <% end %>
                 <% end %>
               </div>
             </div>
@@ -82,131 +89,33 @@
                   <div class="sayit_blog_listing_widget">
                     <div class="sayit_widget_container">
                       <div class="sayit_modern_blog_listing_cont">
-                        <!-- Item 1 -->
-                        <div class="sayit_blog_item post_item_standard" id="111">
-                          <a class="sayit_blog_item_wrapper" href="post_standard.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-1.jpg"></div>
+                        <% if @like_contents.present? %>
+                            <% @like_contents.each do |like_content| %>
+                                <div class="sayit_blog_item post_item_standard" id="111">
+                                  <%= link_to no_like_destinations_path(content_id: like_content), class: 'sayit_blog_item_wrapper' do %>
+                                      <div class="row">
+                                        <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="<%= like_content&.main_image.content.url %>"></div>
 
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
+                                        <div class="col col-8 sayit_blog_item_content_cont">
+                                          <div class="sayit_blog_item_category">
+                                            <div class="sayit_post_categories">
+                                              <%= like_content.category&.title %>
+                                              /
+                                              <%= like_content&.the_time_required %>
+                                            </div>
+                                          </div>
+
+                                          <h4 class="sayit_post_title"><%= like_content&.title %></h4>
+
+                                          <div class="sayit_post_date">
+                                          </div>
+                                        </div>
+                                      </div>
+                                  <% end %>
+                                  <div class="sayit_blog_item_divider"></div>
                                 </div>
-
-                                <h4 class="sayit_post_title">Nibh Urna Hendrerit Risus, Ac Maximus Orci Purus A Nibh</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="sayit_blog_item post_item_standard" id="222">
-                          <a class="sayit_blog_item_wrapper" href="post_image.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-2.jpg"></div>
-
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
-                                </div>
-
-                                <h4 class="sayit_post_title">Phasellus Finibus, Magna Volutpat Mollis Suscipit</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="sayit_blog_item post_item_standard" id="333">
-                          <a class="sayit_blog_item_wrapper" href="post_video.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-3.jpg"></div>
-
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
-                                </div>
-
-                                <h4 class="sayit_post_title">Proin Dictum Nec Urna Eu Pulvinar</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
-
-                        <!-- Item 4 -->
-                        <div class="sayit_blog_item post_item_standard" id="444">
-                          <a class="sayit_blog_item_wrapper" href="post_audio.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-4.jpg"></div>
-
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
-                                </div>
-
-                                <h4 class="sayit_post_title">Duis Ut Ante Ut Mauris Auctor Dictum Id Nec Tortor</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
-
-                        <!-- Item 5 -->
-                        <div class="sayit_blog_item post_item_standard" id="555">
-                          <a class="sayit_blog_item_wrapper" href="post_quote.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-5.jpg"></div>
-
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
-                                </div>
-
-                                <h4 class="sayit_post_title">Sed Vitae Nunc Consectetur, Sollicitudin Sapien</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
-
-                        <!-- Item 6 -->
-                        <div class="sayit_blog_item post_item_standard" id="666">
-                          <a class="sayit_blog_item_wrapper" href="post_link.html">
-                            <div class="row">
-                              <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="/images/front/clipart/places/india/india-6.jpg"></div>
-
-                              <div class="col col-8 sayit_blog_item_content_cont">
-                                <div class="sayit_blog_item_category">
-                                  <div class="sayit_post_categories">India</div>
-                                </div>
-
-                                <h4 class="sayit_post_title">Praesent Viverra Cursus Justo Blandit Mollis</h4>
-
-                                <div class="sayit_post_date">July 11, 2018</div>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="sayit_blog_item_divider"></div>
-                        </div>
+                            <% end %>
+                        <% end %>
                       </div>
                     </div>
                   </div>

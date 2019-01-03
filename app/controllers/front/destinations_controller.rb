@@ -1,6 +1,7 @@
 class Front::DestinationsController < Front::BaseController
   before_action :set_destination, only: [:edit, :update, :destroy]
   before_action :authenticate!, except: [:new, :create, :start_zip_search , :end_zip_search]
+  before_action :find_destination_content, only: [:add_like, :no_like]
 
   def new
     @destination = Destination.new
@@ -37,6 +38,38 @@ class Front::DestinationsController < Front::BaseController
     else
       flash[:alert] = 'お気に入り登録に失敗しました'
       redirect_to tour_select_path(id: params[:id])
+    end
+  end
+
+  def add_like
+    @destination_content.like = 1
+
+    select_destination_content_sort = @destination.destination_contents.where(like: 1).pluck(:sort_seq)
+
+    if select_destination_content_sort.present?
+      max_number = select_destination_content_sort.max
+      @destination_content.sort_seq = max_number + 1
+    else
+      @destination_content.sort_seq = 1
+    end
+
+    if @destination_content.save
+      flash[:notice] = '追加しました'
+      redirect_to selects_destinations_path
+    else
+      flash[:alert] = '追加に失敗しました'
+      redirect_to selects_destinations_path
+    end
+  end
+
+  def no_like
+    @destination_content.like = 0
+    if @destination_content.save
+      flash[:notice] = '戻しました'
+      redirect_to selects_destinations_path
+    else
+      flash[:alert] = '失敗しました'
+      redirect_to selects_destinations_path
     end
   end
 
@@ -79,7 +112,13 @@ class Front::DestinationsController < Front::BaseController
   end
 
   def selects
-    @favorite_contents = @destination.contents.eager_load(:destination_contents).where(destination_contents: {like: 0})
+    contents = @destination.contents.eager_load(:destination_contents)
+    @favorite_contents = contents.where(destination_contents: {like: 0})
+    @like_contents     = contents.where(destination_contents: {like: 1}).order('destination_contents.sort_seq asc')
+  end
+
+  def find_destination_content
+    @destination_content = @destination.destination_contents.find_by(content_id: params[:content_id])
   end
 
   private
