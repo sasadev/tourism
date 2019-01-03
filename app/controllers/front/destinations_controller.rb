@@ -29,6 +29,17 @@ class Front::DestinationsController < Front::BaseController
     end
   end
 
+  def add_content
+    destination_content = @destination.destination_contents.new(content_id: params[:content_id])
+    if destination_content.save
+      flash[:notice] = 'お気に入りに追加しました'
+      redirect_to selects_destinations_path
+    else
+      flash[:alert] = 'お気に入り登録に失敗しました'
+      redirect_to tour_select_path(id: params[:id])
+    end
+  end
+
   def start_zip_search
     address_opt = destination_params[:start_zip].to_i
     zip_list = ZipList.zip_find({zip: address_opt})
@@ -68,7 +79,7 @@ class Front::DestinationsController < Front::BaseController
   end
 
   def selects
-
+    @favorite_contents = @destination.contents.eager_load(:destination_contents).where(destination_contents: {like: 0})
   end
 
   private

@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
     resources :destinations do
       get :selects, on: :collection
+      get :add_content, on: :collection
       match :start_zip_search, via: [:get, :post, :patch], on: :collection
       match :end_zip_search, via: [:get, :post, :patch], on: :collection
     end

@@ -31,54 +31,37 @@
             <div class="sayit_posts_item" style="width: 30%;">
               <div class="sayit_featured_posts sayit_items_2">
                 <!-- Item 1 -->
-                <div class="sayit_posts_item" style="width: 50%;">
-                  <div class="sayit_fimage_cont">
-                    <a href="post_quote.html">
-                      <img src="/images/front/clipart/recent_posts/img-1.jpg" alt="">
-                    </a>
-                  </div>
+                <% @favorite_contents.each do |favorite_content| %>
+                    <div class="sayit_posts_item" style="width: 50%;">
+                      <div class="sayit_fimage_cont">
+                        <%= link_to tour_select_path(favorite_content) do %>
+                            <% if favorite_content&.main_image.present? %>
+                                <% image_tag favorite_content&.main_image.content.url %>
+                            <% else %>
+                                <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
+                            <% end %>
+                        <% end %>
+                      </div>
 
-                  <div class="sayit_meta_cont">
-                    <div class="sayit_post_category">
-                      <a href="#">United Kingdom</a>
+                      <div class="sayit_meta_cont">
+                        <div class="sayit_post_category">
+                          <%= favorite_content.category&.title %>
+                        </div>
+
+                        <span>/</span>
+
+                        <div class="sayit_post_date"><%= favorite_content&.the_time_required %></div>
+                      </div>
+
+                      <h4 class="sayit_post_title">
+                        <%= link_to favorite_content&.title, tour_select_path(favorite_content) %>
+                      </h4>
+
+                      <div class="sayit_excerpt index_description">
+                        <p><%= favorite_content&.index_description %></p>
+                      </div>
                     </div>
-
-                    <span>/</span>
-
-                    <div class="sayit_post_date">July 11, 2018</div>
-                  </div>
-
-                  <h4 class="sayit_post_title">
-                    <a href="post_quote.html">Vivamus Dignissim Dui</a>
-                  </h4>
-
-                  <div class="sayit_excerpt">Nunc mattis tellus sit amet tincidunt elementum. Sed cursus, ligula in scelerisque facilisis, metus mauris placerat...</div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="sayit_posts_item" style="width: 50%;">
-                  <div class="sayit_fimage_cont">
-                    <a href="post_link.html">
-                      <img src="/images/front/clipart/recent_posts/img-1.jpg" alt="">
-                    </a>
-                  </div>
-
-                  <div class="sayit_meta_cont">
-                    <div class="sayit_post_category">
-                      <a href="#">Turkey</a>
-                    </div>
-
-                    <span>/</span>
-
-                    <div class="sayit_post_date">July 11, 2018</div>
-                  </div>
-
-                  <h4 class="sayit_post_title">
-                    <a href="post_link.html">Elementum Quam Porta</a>
-                  </h4>
-
-                  <div class="sayit_excerpt">Aenean pellentesque lectus quis erat lacinia gravida. Sed cursus vestibulum enim. Ut hendrerit pellentesque odio,...</div>
-                </div>
+                <% end %>
               </div>
             </div>
 

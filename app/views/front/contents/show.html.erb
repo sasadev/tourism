@@ -31,14 +31,25 @@
         <%= simple_format(@content&.description) %>
       </div>
 
+      <div class="row align-middle sayit_tags_and_socials_cont">
+        <div class="sayit_post_tags col" style="font-size: 16px;">
+          <div>
+            <% unless @content.destination_contents.pluck(:content_id).include?(@content.id) %>
+                <%= link_to 'お気に入りに追加', add_content_destinations_path(content_id: @content), class: 'btn btn-default' %>
+            <% else %>
+                <%= link_to 'お気に入り登録済み', '#', class: 'btn btn-default' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <!-- Tags Area -->
       <div class="row align-middle sayit_tags_and_socials_cont">
         <div class="sayit_post_tags col">
           <div>
-            <a href="#">Blog</a>
-            <a href="#">City</a>
-            <a href="#">France</a>
-            <a href="#">Travel</a>
+            <% @content.preferences.each do |preference| %>
+                <%= link_to preference.title, tour_selects_path(query: {title: '', prefecture_id: '', price_check: '', category_id: '', preference_ids: [preference.id]}) %>
+            <% end %>
           </div>
         </div>
       </div>

@@ -9,5 +9,9 @@ class Destination < BasicRecord::Base001
 
   has_many :destination_transportations
   has_many :transportations, through: :destination_transportations
+  has_many :destination_contents
+  has_many :contents, through: :destination_contents
+
   accepts_nested_attributes_for :destination_transportations, allow_destroy: true
+  accepts_nested_attributes_for :destination_contents, allow_destroy: true
 end

@@ -7,7 +7,10 @@ class Content < BasicRecord::Base001
   has_many :content_images
   has_many :preference_contents
   has_many :preferences, through: :preference_contents
+  has_many :destination_contents
+  has_many :destinations, through: :destination_contents
   accepts_nested_attributes_for :content_images, allow_destroy: true
+  accepts_nested_attributes_for :destination_contents, allow_destroy: true
   accepts_nested_attributes_for :preference_contents, allow_destroy: true
 
   validates :title, :description, :zip, :address, :amount, :prefecture_id, :category_id, :time_required, :activity, presence: {}
