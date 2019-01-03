@@ -16,7 +16,6 @@
 
 <body class="sayit_js_bg_color" data-bgcolor="#ffffff">
 <!-- Additional Sidebar -->
-<% if false %>
     <div class="sayit_additional_sidebar_cont">
       <a class="sayit_additional_sidebar_close_button" href="javascript:void(0)"><i class="fa fa-times"></i></a>
 
@@ -95,7 +94,6 @@
         </div>
       </div>
     </div>
-<% end %>
 <div class="sayit_additional_overlay"></div>
 
 <!-- Header -->
@@ -115,7 +113,6 @@
       </div>
     </div>
 
-    <% if false %>
         <div class="col sayit_menu_container col-8">
           <div class="sayit_menu_cont">
             <div class="sayit_additional_button_cont">
@@ -124,97 +121,29 @@
 
             <div class="sayit_menu_inner">
               <ul class="sayit_menu sayit_header_menu">
-                <!-- Start Here -->
-                <li class="menu-item-has-children menu-item current-menu-ancestor">
-                  <a href="javascript:void(0)">Start Here</a>
-
-                  <ul class="sub-menu">
-                    <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="about.html">About Me</a></li>
-                    <li class="menu-item"><a href="plan_trip.html">Plan Your Trip</a></li>
-                  </ul>
-                </li>
-
-                <!-- Blog -->
-                <li class="menu-item-has-children menu-item">
-                  <a href="javascript:void(0)">Blog</a>
-
-                  <ul class="sub-menu">
-                    <li class="menu-item"><a href="blog_classic.html">Blog Classic</a></li>
-                    <li class="menu-item"><a href="blog_modern.html">Blog Modern</a></li>
-                    <li class="menu-item"><a href="blog_grid.html">Blog Grid</a></li>
-                    <li class="menu-item"><a href="blog_masonry.html">Blog Masonry</a></li>
-                    <li class="menu-item"><a href="blog_masonry_2.html">Blog Masonry Type 2</a></li>
-                    <li class="menu-item"><a href="blog_packery.html">Blog Packery</a></li>
-                    <li class="menu-item-has-children menu-item">
-                      <a href="javascript:void(0)">Single Posts</a>
-
-                      <ul class="sub-menu">
-                        <li class="menu-item"><a href="post_standard.html">Standard Post</a></li>
-                        <li class="menu-item"><a href="post_image.html">Image Post></a></li>
-                        <li class="menu-item"><a href="post_video.html">Video Post</a></li>
-                        <li class="menu-item"><a href="post_audio.html">Audio Post</a></li>
-                        <li class="menu-item"><a href="post_quote.html">Quote Post</a></li>
-                        <li class="menu-item"><a href="post_link.html">Link Post</a></li>
-                      </ul>
+                <% if session[:destination_id].blank? %>
+                    <li class="menu-item">
+                      <%= link_to '移動手段情報入力', new_destination_path %>
                     </li>
-                  </ul>
-                </li>
+                <% else %>
+                    <li class="menu-item">
+                      <%= link_to '観光スポット選択', tour_selects_path %></a>
+                    </li>
 
-                <!-- Places -->
-                <li class="menu-item-has-children menu-item">
-                  <a href="javascript:void(0)">Places</a>
+                    <!-- Blog -->
+                    <li class="menu-item">
+                      <%= link_to '移動手段決定', selects_destinations_path %></a>
+                    </li>
 
-                  <ul class="sub-menu">
-                    <li class="menu-item"><a href="places_usa.html">USA</a></li>
-                    <li class="menu-item"><a href="places_india.html">India</a></li>
-                    <li class="menu-item"><a href="places_germany.html">Germany</a></li>
-                    <li class="menu-item"><a href="places_turkey.html">Turkey</a></li>
-                    <li class="menu-item"><a href="places_italy.html">Italy</a></li>
-                    <li class="menu-item"><a href="places_uk.html">United Kingdom</a></li>
-                    <li class="menu-item"><a href="places_france.html">France</a></li>
-                  </ul>
-                </li>
-
-                <!-- Pages -->
-                <li class="menu-item-has-children menu-item">
-                  <a href="javascript:void(0)">Pages</a>
-
-                  <ul class="sub-menu">
-                    <li class="menu-item"><a href="typography.html">Typography</a></li>
-                    <li class="menu-item"><a href="coming_soon.html">Coming Soon</a></li>
-                  </ul>
-                </li>
-
-                <!-- Contacts -->
-                <li class="menu-item"><a href="contacts.html">Contacts</a></li>
+                    <!-- Places -->
+                    <li class="menu-item">
+                      <%= link_to '移動手段情報編集', edit_destination_path(id: session[:destination_id]) %>
+                    </li>
+                <% end %>
               </ul>
             </div>
           </div>
         </div>
-
-        <div class="col sayit_header_socials_and_search_container col-2 sayit_text_align_right">
-          <div class="sayit_header_socials">
-            <a class="sayit_footer_social_button sayit_facebook" href="https://www.facebook.com/"><i class="icon-facebook"></i></a>
-            <a class="sayit_footer_social_button sayit_twitter" href="https://twitter.com/"><i class="icon-twitter"></i></a>
-            <a class="sayit_footer_social_button sayit_linkedin" href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
-          </div>
-
-          <div class="sayit_header_search_container">
-            <a class="sayit_header_search_button" href="javascript:void(0)"><i class="icon-search"></i></a>
-
-            <div class="sayit_header_search_popup">
-              <div class="sayit_header_search_content_cont">
-                <form name="header_search_form" id="header_search_form" class="sayit_search_form" method="get">
-                  <span class="sayit_icon_search"><i class="fa fa-search"></i></span>
-                  <input type="text" name="s" placeholder="Search" title="Search the site..." class="sayit_field_search" form="header_search_form">
-                  <div class="clear"></div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-    <% end %>
   </div>
 
   <div class="sayit_menu_mobile">
@@ -294,7 +223,6 @@
 <!-- Footer -->
 <div class="sayit_footer">
   <!-- Footer Instagram -->
-  <% if false %>
       <div class="sayit_photostream">
         <div class="instagallery">
           <!-- Item 1 -->
@@ -450,7 +378,6 @@
           </div>
         </div>
       </div>
-  <% end %>
 
   <!-- Back To Top -->
   <a class="sayit_back_to_top" href="javascript:void(0)">Top</a>

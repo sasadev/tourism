@@ -1,6 +1,6 @@
 class Front::DestinationsController < Front::BaseController
   before_action :set_destination, only: [:edit, :update, :destroy]
-  before_action :authenticate!, except: [:new, :create]
+  before_action :authenticate!, except: [:new, :create, :start_zip_search , :end_zip_search]
 
   def new
     @destination = Destination.new
@@ -9,7 +9,7 @@ class Front::DestinationsController < Front::BaseController
   def create
     @destination = Destination.new(destination_params)
     if @destination.save
-      session[:destination_id] = @destination.id
+      session[:destination_id] = @destination.to_param
       redirect_to edit_destination_path(@destination), notice: t('activerecord.flash.destination.actions.create.success')
     else
       render :new

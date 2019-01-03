@@ -14,10 +14,14 @@ class Front::BaseController < ApplicationController
 	end
 
 	def authenticate!
-		if  @destination = Destination.alive_record(id: session[:destination_id], deleted: 0)
+		if session[:destination_id].present?
+			if  @destination = Destination.custom_find_by(id: session[:destination_id])
+			else
+				flash.now[:alert] = '目的地を設定して下さい'
+				redirect_to new_destination_path
+			end
 		else
-			flash.now[:alert] = '目的地を設定して下さい'
-			redirect_to new_destinations_path
+			redirect_to new_destination_path
 		end
 	end
 
