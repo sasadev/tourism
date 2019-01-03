@@ -5,13 +5,17 @@ class Front::ContentsController < Front::BaseController
     params[:query] ||= {}
 
     search_query = {
-        title: params[:query][:title],
-        prefecture_id: params[:query][:prefecture_id],
-        price_check: params[:query][:price_check],
-        category_id: params[:query][:category_id],
-        preference_ids: params[:query][:preference_ids],
+        page: params[:page],
+        :query => {
+            title: params[:query][:title],
+            prefecture_id: params[:query][:prefecture_id],
+            price_check: params[:query][:price_check],
+            category_id: params[:query][:category_id],
+            preference_ids: params[:query][:preference_ids]
+        }
     }
-    @contents, @query = FrontContentSearchForm.generate_objects(query: search_query)
+
+    @contents, @query = FrontContentSearchForm.generate_objects(search_query)
   end
 
   def show

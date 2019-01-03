@@ -38,7 +38,6 @@ class SearchForm
 					end
 					search_form = new(YAML::load(sql_condition.condition))
 				else
-					p params
 					search_form = new(params[:query])
 				end
 
