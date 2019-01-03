@@ -23,72 +23,15 @@
         <div class="widget widget_text">
           <h6 class="widgettitle">About Me</h6>
 
-          <div class="textwidget">
-            <p><img src="/images/front/clipart/author.jpg" alt=""/></p>
-            <h5>My name is Jennifer</h5>
-            <p>Praesent tortor sapien, elementum at elementum id, blandit vel tellus. Praesent sodales sapien dapibus augue luctus, id pharetra odio tempor. Curabitur accumsan finibus elit in ullamcorper. Vestibulum metus dui, interdum at lectus non, accumsan rhoncus justo. Sed mollis augue quis massa dapibus, quis faucibus.</p>
-            <p><a class="sayit_abut_me_button" href="about.html">Read More</a></p>
-          </div>
-        </div>
-
-        <div class="widget instagal-widget">
-          <h6 class="widgettitle">Instagram</h6>
-
-          <div class="instagallery">
-            <!-- Item 1 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-1.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-2.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-3.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-4.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 5 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-5.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 6 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-6.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 7 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-7.jpg" alt="" />
-              </a>
-            </div>
-
-            <!-- Item 8 -->
-            <div class="ig-item">
-              <a href="#">
-                <img src="/images/front/clipart/instagram/img-8.jpg" alt="" />
-              </a>
+          <div class="col col-12 sayit_content">
+            <div class="sayit_tiny">
+              <div class="sayit_blog_listing_widget">
+                <div class="sayit_widget_container">
+                  <div class="sayit_modern_blog_listing_cont">
+                    <div id="weather"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -415,3 +358,56 @@
 <%= yield :javascripts %>
 </body>
 </html>
+
+<script>
+  $(function() {
+    var API_KEY = '252609b190b3b599bcda16a1c6d0d081'
+    var city = 'Tokyo';
+    var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + API_KEY;
+    $.ajax({
+          url: url,
+          dataType: "json",
+          type: 'GET',
+        })
+        .done(function(data) {
+          var insertHTML = "";
+          var cityName = '<h2>' + data.city.name + '</h2>';
+          $('#city-name').html(cityName);
+          for (var i = 0; i <= 20; i = i + 2) {
+            insertHTML += buildHTML(data, i);
+          }
+          $('#weather').html(insertHTML);
+        })
+        .fail(function(data) {
+          console.log("失敗しました");
+        });
+  });
+
+  function buildHTML(data, i) {
+    var Week = new Array("（日）","（月）","（火）","（水）","（木）","（金）","（土）");
+    var date = new Date (data.list[i].dt_txt);
+    date.setHours(date.getHours() + 9);
+    var month = date.getMonth()+1;
+    var day = month + "月" + date.getDate() + "日" + Week[date.getDay()] + date.getHours() + "：00";
+    var icon = data.list[i].weather[0].icon;
+    var html =
+        '<div class="sayit_blog_item post_item_standard">' +
+        '<a class="sayit_blog_item_wrapper" href="#">' +
+        '<div class="row">' +
+        '<div class="col col-3 sayit_blog_item_fimage_cont sayit_js_bg_image">' +
+        '<img src="http://openweathermap.org/img/w/' + icon + '.png" style="height: 70px; width: 70px;">' +
+        '</div>' +
+        '<div class="col col-9 sayit_blog_item_content_cont">' +
+        '<div class="sayit_blog_item_category">' +
+        '<div class="sayit_post_categories">' + day + '</div>' +
+        '</div>' +
+        '<div class="sayit_post_date">'+ data.list[i].weather[0].main + '</div>' +
+        '<div class="sayit_post_date">' + Math.round(data.list[i].main.temp) + '℃</div>' +
+        '</div>' +
+        '</div>' +
+        '</a>' +
+        '<div class="sayit_blog_item_divider"></div>' +
+        '</div>';
+    return html
+  }
+</script>
