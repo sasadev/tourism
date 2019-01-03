@@ -1,0 +1,69 @@
+<%= render partial: 'search_form' %>
+<div class="row">
+  <div class="col-12">
+    <div class="box">
+      <div class="box-header">
+      </div>
+      <%= form_tag sort_admin_transportations_path do %>
+          <div class="box-body no-padding">
+            <table class="table table-bordered table-responsive">
+              <tr>
+                <th></th>
+                <th><%= Transportation.human_attribute_name :title %></th>
+                <th></th>
+              </tr>
+              <tbody id="transportation_contents">
+              <% @transportations.each.with_index(1) do |transportation, i| %>
+                  <tr style="line-height: 65px;">
+                    <td>
+                      <%= hidden_field_tag 'transportation_contents[]', transportation.id %>
+                      <%= text_field_tag 'sort_seq[]', transportation.sort_seq, class: 'form-control text-center input-sm item-field-sort-seq', onchange: "manualticSortSeq($('#transportation_contents'))" %>
+                    </td>
+                    <td><%= transportation&.title %></td>
+                    <td colspan="2">
+                      <%= link_to raw('<i class="fa fa-edit"></i> 編集'), edit_admin_transportation_path(transportation), class: 'btn btn-app bg-blue' %>
+                      <%= link_to raw('<i class="fa fa-trash-o "></i> 削除'), admin_transportation_path(transportation), method: :delete, data: {confirm: t('messages.destroy_confirm') }, class: 'btn btn-app bg-red'  %>
+                    </td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <div>
+              <%= submit_tag '並び替え', class: 'btn-lg btn-primary pull-right margin-top-20' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(function(){
+    $("#transportation_contents").sortable({
+      tolerance: 'pointer',
+      revert: false,
+      forceHelperSize: true,
+      update: function() {
+        updateSortSeq(this)
+      }
+    });
+  });
+
+  function updateSortSeq(obj) {
+    setTimeout(function(){
+      $(obj).children("tr").each(function(index) {
+        $(this).children().children('input.item-field-sort-seq').val(index + 1);
+      });
+    },100);
+  }
+
+  function manualticSortSeq() {
+    $('#transportation_contents').html(
+        $('#transportation_contents').find('tr').sort(function(a, b) {
+          return parseInt($(a).find(".item-field-sort-seq").val()) < parseInt($(b).find(".item-field-sort-seq").val()) ? -1 : 1;
+        })
+    );
+    updateSortSeq('#transportation_contents');
+  }
+</script>

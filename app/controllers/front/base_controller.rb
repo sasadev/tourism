@@ -4,7 +4,6 @@ class Front::BaseController < ApplicationController
 	# include SessionHelper
 	layout 'front'
 	before_action :maintenance_mode?
-	# before_action :login_user
 
 	def zip_search
 		zip_list = ZipList.zip_find(zip: params[:zip])
@@ -12,6 +11,14 @@ class Front::BaseController < ApplicationController
 	rescue => e
 		p e
 		head 500
+	end
+
+	def authenticate!
+		if  @destination = Destination.alive_record(id: session[:destination_id], deleted: 0)
+		else
+			flash.now[:alert] = '目的地を設定して下さい'
+			redirect_to new_destinations_path
+		end
 	end
 
 	protected

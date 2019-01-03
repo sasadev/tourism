@@ -1,4 +1,6 @@
 class Front::ContentsController < Front::BaseController
+  before_action :authenticate!
+
   def index
     params[:query] ||= {}
 

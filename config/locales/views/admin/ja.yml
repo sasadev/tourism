@@ -66,3 +66,11 @@ ja:
         title: メール条件
         actions:
           <<: *default
+      countries:
+        title: 国籍管理
+        actions:
+          <<: *default
+      transportations:
+        title: 移動手段管理
+        actions:
+          <<: *default

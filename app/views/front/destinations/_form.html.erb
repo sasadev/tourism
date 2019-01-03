@@ -1,0 +1,156 @@
+<!-- Title Block -->
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="images/front/clipart/back-9.jpg" data-height="600">
+  <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
+
+  <div class="sayit_title_wrapper col push-middle">
+    <h1 class="sayit_post_title">Contacts</h1>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="sayit_container content_box_narrow sayit_right_sidebar">
+  <div class="row sayit_right_sidebar">
+    <!-- Content Area -->
+    <div class="col col-12 sayit_content content_box_bg_color_on">
+      <div class="sayit_tiny">
+        <div class="row">
+          <div class="col col-12 push-center">
+            <div class="sayit_widget_title">
+              <div class="sayit_widget_container sayit_text_align_center sayit_mb_20">
+                <h2 class="sayit_element_heading sayit_view_type_1"><%= Destination.model_name.human %></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Form Widget -->
+        <%= nested_form_for [@destination] do |f| %>
+            <div class="sayit_form_widget">
+              <div class="sayit_widget_container">
+                <div class="sayit_form_wrapper">
+                  <p>
+                    <span><%= Destination.human_attribute_name :visit %></span>
+                    <%= f.select :visit, Destination.visits_i18n.invert, {}, class: 'select2 margin-bottom-30' %>
+
+                    <span><%= Destination.human_attribute_name :stay %></span>
+                    <%= f.select :stay, Destination.stays_i18n.invert, {}, class: 'select2 margin-bottom-30' %>
+
+                    <span><%= Destination.human_attribute_name :sex %></span>
+                    <%= f.select :sex, Destination.sexes_i18n.invert, {}, class: 'select2 margin-bottom-30' %>
+
+                    <span><%= Destination.human_attribute_name :number_people %></span>
+                    <%= f.select :number_people, Destination.number_people_i18n.invert, {}, class: 'select2 margin-bottom-30' %>
+
+                    <span><%= Destination.human_attribute_name :age %></span>
+                    <%= f.select :age, Destination.ages_i18n.invert, {}, class: 'select2 margin-bottom-30' %>
+
+                    <span><%= Destination.human_attribute_name :country_id %></span>
+                    <%= f.select :country_id, Country.alive_records.order(sort_seq: :asc).pluck(:title, :id), {}, class: 'select2 margin-bottom-30' %>
+
+                  <ul style="list-style: none;">
+                    <% transportation_ids = @destination.destination_transportations.pluck(:transportation_id) %>
+                    <% Transportation.alive_records.order(sort_seq: :asc).each do |transportation| %>
+                        <li>
+                          <%= check_box_tag 'destination[transportation_ids][]', transportation.id, transportation_ids.include?(transportation.id), style: 'width: 10%' %>
+                          <%= transportation.title %>
+                        </li>
+                    <% end %>
+                  </ul>
+
+                  <div class="row">
+                    <div class="col col-12 push-center">
+                      <div class="sayit_widget_title">
+                        <div class="sayit_widget_container sayit_text_align_center sayit_mb_20">
+                          <h2 class="sayit_element_heading sayit_view_type_1">出発地点設定</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span><%= Destination.human_attribute_name :departure %></span>
+                  <%= f.text_field :departure, class: 'select2 margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :zip %></span>
+                  <div>
+                    <%= f.text_field :start_zip, maxlength: 7, class: 'margin-bottom-30', style: 'width: 10%; display: inline-block;' %>
+                    <%= link_to_remote raw("<button type=\"button\" class=\"btn btn-secondary\" >検索</button>"),{
+                        :url =>      start_zip_search_destinations_path,
+                        :method => "POST",
+                        :loading => true,
+                        :submit => "destination-form"
+                    },{ style: 'display: inline-block;',id: "start_zip_search"}
+                    %>
+                  </div>
+
+                  <span><%= Destination.human_attribute_name :prefecture_id %></span>
+                  <%= f.select :start_prefecture_id, Prefecture.alive_records.pluck(:name, :id), {}, class: 'select2 margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :address %></span>
+                  <%= f.text_field :start_address, class: 'margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :building %></span>
+                  <%= f.text_field :start_building, class: 'margin-bottom-30' %>
+
+                  <div class="row">
+                    <div class="col col-12 push-center">
+                      <div class="sayit_widget_title">
+                        <div class="sayit_widget_container sayit_text_align_center sayit_mb_20">
+                          <h2 class="sayit_element_heading sayit_view_type_1">到着地点設定</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span><%= Destination.human_attribute_name :arrival %></span>
+                  <%= f.text_field :arrival, class: 'select2 margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :zip %></span>
+                  <div>
+                    <%= f.text_field :end_zip, maxlength: 7, class: 'margin-bottom-30', style: 'width: 10%; display: inline-block;' %>
+                    <span class="formComm">
+                            <%= link_to_remote raw("<button type=\"button\" class=\"btn btn-secondary\" >検索</button>"),{
+                                :url =>      end_zip_search_destinations_path,
+                                :method => "POST",
+                                :loading => true,
+                                :submit => "destination-form"
+                            },{ style: 'display: inline-block;',id: "end_zip_search"}
+                            %>
+                          </span>
+                  </div>
+
+                  <span><%= Destination.human_attribute_name :prefecture_id %></span>
+                  <%= f.select :end_prefecture_id, Prefecture.alive_records.pluck(:name, :id), {}, class: 'select2 margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :address %></span>
+                  <%= f.text_field :end_address, class: 'margin-bottom-30' %>
+
+                  <span><%= Destination.human_attribute_name :building %></span>
+                  <%= f.text_field :end_building, class: 'margin-bottom-30' %>
+
+                  <%= f.submit '登録' %>
+                  </p>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#destination_start_zip').keyup(function(e){
+    var destination_start_zip = $('#destination_start_zip').val();
+    if (destination_start_zip.length == 7) {
+      $('#start_zip_search')[0].click();
+    }
+  });
+</script>
+
+<script>
+  $('#destination_end_zip').keyup(function(e){
+    var destination_start_zip = $('#destination_end_zip').val();
+    if (destination_start_zip.length == 7) {
+      $('#end_zip_search')[0].click();
+    }
+  });
+</script>

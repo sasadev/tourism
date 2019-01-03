@@ -1,0 +1,36 @@
+<%= nested_form_for [:admin, @country] do |f| %>
+
+      <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group row">
+                <label for="example-search-input" class="col-sm-2 col-form-label"><%= Country.human_attribute_name :title %></label>
+                <div class="col-sm-10 <%= 'has-danger' if @country.errors[:title].present? %>">
+                  <%= f.text_field :title, class: 'form-control' %>
+                  <p style="color: red;"><%= @country.error_messages_for :title %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+            <%= link_to raw('<i class="fa fa-indent"></i> 一覧'), admin_countries_path, class: 'btn btn-app bg-blue' %>
+            <%= button_tag type: 'submit', class: 'btn btn-app bg-olive' do %>
+                <i class="fa fa-save"></i> 登録
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+<% end %>
+
+

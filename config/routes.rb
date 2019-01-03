@@ -33,8 +33,18 @@ Rails.application.routes.draw do
       match :sort, via: [:get, :post], on: :collection
     end
 
-    # 好み
+    # タグ
     resources :preferences do
+      match :sort, via: [:get, :post], on: :collection
+    end
+
+    # 国籍
+    resources :countries do
+      match :sort, via: [:get, :post], on: :collection
+    end
+
+    # 国籍
+    resources :transportations do
       match :sort, via: [:get, :post], on: :collection
     end
 
@@ -47,5 +57,11 @@ Rails.application.routes.draw do
     root 'page#index'
 
     resources :tour_selects, controller: :contents
+
+    resources :destinations do
+      get :selects, on: :collection
+      match :start_zip_search, via: [:get, :post, :patch], on: :collection
+      match :end_zip_search, via: [:get, :post, :patch], on: :collection
+    end
   end
 end
