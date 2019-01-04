@@ -74,11 +74,8 @@
 
             <!-- Item 2 -->
             <div class="sayit_posts_item" style="width: 40%;">
-              <div class="sayit_fimage_cont">
-                <a href="post_image.html">
-                  <img src="/images/front/clipart/recent_posts/img-2.jpg" alt="">
-                </a>
-              </div>
+              <div id="gmap"></div>
+              <div id="route"></div>
             </div>
 
             <!-- Item 3 -->
@@ -89,9 +86,21 @@
                   <div class="sayit_blog_listing_widget">
                     <div class="sayit_widget_container">
                       <div class="sayit_modern_blog_listing_cont">
+                        <div class="sayit_blog_item post_item_standard">
+                          <a class="sayit_blog_item_wrapper" href="post_standard.html">
+                            <div class="row">
+                              <div class="col col-12 sayit_blog_item_content_cont">
+                                <h4 class="sayit_post_title">出発地: <%= @destination.departure %></h4>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="moving_distance">
+                          移動: <span id="time_0"></span>分 / 距離: <span id="distance_0"></span> km
+                        </div>
                         <% if @like_contents.present? %>
-                            <% @like_contents.each do |like_content| %>
-                                <div class="sayit_blog_item post_item_standard" id="111">
+                            <% @like_contents.each.with_index(1) do |like_content, i| %>
+                                <div class="sayit_blog_item post_item_standard">
                                   <%= link_to no_like_destinations_path(content_id: like_content), class: 'sayit_blog_item_wrapper' do %>
                                       <div class="row">
                                         <div class="col col-4 sayit_blog_item_fimage_cont sayit_js_bg_image" data-src="<%= like_content&.main_image.content.url %>"></div>
@@ -112,10 +121,37 @@
                                         </div>
                                       </div>
                                   <% end %>
-                                  <div class="sayit_blog_item_divider"></div>
+                                </div>
+                                <div class="moving_distance">
+                                  移動: <span id="time_<%= i %>"></span>分 / 距離: <span id="distance_<%= i %>"></span> km
                                 </div>
                             <% end %>
                         <% end %>
+                        <div class="sayit_blog_item post_item_standard">
+                          <a class="sayit_blog_item_wrapper" href="post_standard.html">
+                            <div class="row">
+                              <div class="col col-12 sayit_blog_item_content_cont">
+                                <h4 class="sayit_post_title">到着地: <%= @destination.arrival %></h4>
+                              </div>
+                            </div>
+                          </a>
+
+                          <div class="sayit_blog_item_divider"></div>
+                        </div>
+                        <div class="sayit_blog_item post_item_standard">
+                          <a class="sayit_blog_item_wrapper" href="post_standard.html">
+                            <div class="row">
+                              <div class="col col-12 sayit_blog_item_content_cont">
+                                <h4 class="sayit_post_title">合計時間: <span id="all_time"></span>分</h4>
+                                <h4 class="sayit_post_title">合計距離: <span id="all_distance"></span> km</h4>
+                                <% if @like_contents.present? %>
+                                    <% total_amount = @like_contents.pluck(:amount).sum %>
+                                    <h4 class="sayit_post_title">合計金額: <%= number_to_currency(total_amount) %></h4>
+                                <% end %>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -132,3 +168,107 @@
     <!-- Sidebar Area -->
   </div>
 </div>
+
+
+<script>
+  function initMap() {
+    var time_array = [];
+    var distance_array = [];
+    var request = {
+      origin: new google.maps.LatLng(<%= @destination.start_latitude %>,<%= @destination.start_longitude %>),
+      destination: new google.maps.LatLng(<%= @destination.end_latitude %>,<%= @destination.end_longitude %>),
+      <% if @like_contents.present? %>
+      waypoints: [
+        <% @like_contents.each do |like_content| %>
+        { location: new google.maps.LatLng(<%= like_content.latitude %>,<%= like_content.longitude %>) },
+        <% end %>
+      ],
+      <% end %>
+      travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段(歩行WALKING。DRIVINGの場合は車)
+    };
+
+    // マップの生成
+    var map = new google.maps.Map(document.getElementById("gmap"), {
+      center: new google.maps.LatLng(<%= @destination.start_latitude %>,<%= @destination.start_longitude %>),
+      zoom: 11
+    });
+
+    var d = new google.maps.DirectionsService();
+    var r = new google.maps.DirectionsRenderer({
+      map: map,
+      preserveViewport: true,
+    });
+    // ルート検索
+    d.route(request, function(result, status){
+      if (status == google.maps.DirectionsStatus.OK) {
+        r.setDirections(result);
+
+        var legs = result.routes[0].legs
+
+        for (var i in legs) {
+          var time_change = TimeChange(legs[i].duration.text);
+          var distance_change = DistanceChange(legs[i].distance.text);
+          distance_box = document.getElementById('distance_' + i)
+          distance_box.innerHTML = distance_change;
+          distance_array.unshift(distance_change);
+
+          time_box = document.getElementById('time_' + i)
+          time_box.innerHTML = time_change;
+          time_array.unshift(time_change);
+        }
+          <% if @like_contents.present? %>
+            <% @like_contents.each do |like_content| %>
+              time_array.unshift(<%= like_content.time_required %>);
+            <% end %>
+          <% end %>
+        var all_time = document.getElementById('all_time')
+        var all_distance = document.getElementById('all_distance')
+        all_time.innerHTML = Sum(time_array)
+        all_distance.innerHTML = DistanceSum(distance_array)
+      }
+    });
+  }
+
+  function TimeChange(time_string) {
+    array_time = time_string.split("時間")
+    if (array_time.length == 2) {
+      var hour = Number(array_time[0])
+      var full_hour = 60 * hour
+
+      var minute_string = array_time[1].split("分")[0]
+      var minute = Number(minute_string)
+      var int_time = full_hour + minute
+    }else{
+      var select_time_string = time_string.split("分")[0]
+      var int_time = Number(select_time_string)
+    }
+    return int_time;
+  }
+
+  function DistanceChange(distance_string) {
+    return Number(distance_string.split(" km")[0])
+  }
+
+  function Sum(arr) {
+    sum = arr.reduce((a,x) => a+=x);
+    return sum;
+  }
+
+  function DistanceSum(arr) {
+    var new_arr = []
+    for (var i in arr) {
+      var distance = arr[i]
+      var new_distance = distance * 10
+      new_arr.unshift(new_distance);
+    }
+    sum = new_arr.reduce((a,x) => a+=x);
+
+    var total_sum = sum / 10
+    return total_sum;
+  }
+
+  function isInteger(x) {
+    return Math.round(x) === x;
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQy70gYOp30pnhINaioRUmd-Eahmc-XUA&callback=initMap" async defer></script>

@@ -72,6 +72,7 @@ gem 'rqrcode_png'
 gem 'thinreports', '0.10.0'
 gem 'redis'
 gem 'faker'
+gem 'http'
 
 # 画像
 gem 'rmagick'
