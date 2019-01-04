@@ -1,5 +1,5 @@
 <!-- Title Block -->
-<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/back-7.jpg" data-height="800">
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/back-7.jpg" data-height="400">
   <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
 
   <div class="sayit_title_wrapper col push-middle">
@@ -18,7 +18,6 @@
           <div class="sayit_widget_title">
             <div class="sayit_widget_container sayit_text_align_center sayit_mb_60">
               <h2 class="sayit_element_heading sayit_view_type_1">See My Favorite Travels</h2>
-              <p class="sayit_subtitle_cont">Mauris efficitur turpis sit amet sem accumsan iaculis. Vivamus nec dolor convallis, viverra urna at, fermentum nulla.</p>
             </div>
           </div>
         </div>
@@ -37,7 +36,7 @@
                           <div class="sayit_fimage_cont">
                             <%= link_to tour_select_path(favorite_content) do %>
                                 <% if favorite_content&.main_image.present? %>
-                                    <% image_tag favorite_content&.main_image.content.url %>
+                                    <% image_tag favorite_content&.main_image.show.url %>
                                 <% else %>
                                     <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
                                 <% end %>

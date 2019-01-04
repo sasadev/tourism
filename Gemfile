@@ -54,7 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # 追加文
-
+gem 'therubyracer'
 gem 'pg'
 gem 'unicorn'
 gem 'kaminari'

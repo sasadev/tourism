@@ -31,7 +31,7 @@
                       <div class="sayit_blog_item_fimage">
                         <%= link_to tour_select_path(content) do %>
                             <% if content&.main_image.present? %>
-                                <% image_tag content&.main_image.content.url %>
+                                <% image_tag content&.main_image.show.url %>
                             <% else %>
                                 <img src="/images/front/clipart/places/germany/germany-1.jpg" alt="" />
                             <% end %>
