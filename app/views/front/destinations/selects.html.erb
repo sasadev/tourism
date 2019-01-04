@@ -190,7 +190,7 @@
     // マップの生成
     var map = new google.maps.Map(document.getElementById("gmap"), {
       center: new google.maps.LatLng(<%= @destination.start_latitude %>,<%= @destination.start_longitude %>),
-      zoom: 11
+      zoom: 14
     });
 
     var d = new google.maps.DirectionsService();
