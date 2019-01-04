@@ -1210,7 +1210,7 @@ a:active, a:focus, a:hover {
 	margin-top: -1px;
 }
 @media (max-width:991px) {
-    .navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default: hover {
+    .navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default hover {
     background-color: #f9f9f9;
 }
 .navbar-custom-menu>.navbar-nav {
