@@ -122,7 +122,7 @@ class Front::DestinationsController < Front::BaseController
   end
 
   def complete
-    @destination.total_distance = params[:total_distance].to_i if params[:total_distance].present?
+    @destination.total_distance = params[:total_distance].to_f if params[:total_distance].present?
     @destination.total_time = params[:total_time].to_i if params[:total_time].present?
     @destination.total_amount = params[:total_amount].to_i if params[:total_amount].present?
     @destination.save
