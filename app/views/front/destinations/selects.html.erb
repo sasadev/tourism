@@ -158,7 +158,7 @@
                               <% if @like_contents.present? %>
                                 <%= hidden_field_tag :total_amount, total_amount %>
                               <% end %>
-                              <%= hidden_field_tag :total_destance %>
+                              <%= hidden_field_tag :total_distance %>
                               <%= hidden_field_tag :total_time %>
                               <%= submit_tag '完了する' %>
                             </div>
@@ -235,7 +235,7 @@
         var all_time = document.getElementById('all_time')
         var total_time = document.getElementById('total_time')
         var all_distance = document.getElementById('all_distance')
-        var total_distance = document.getElementById('total_destance')
+        var total_distance = document.getElementById('total_distance')
         all_time.innerHTML = Sum(time_array)
         total_time.value = DistanceSum(time_array)
         all_distance.innerHTML = DistanceSum(distance_array)

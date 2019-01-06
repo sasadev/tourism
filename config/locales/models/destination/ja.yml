@@ -16,7 +16,7 @@ ja:
         age: 年齢層
         memo: メモ
         total_time: 合計移動時間
-        total_destance: 合計移動距離
+        total_distance: 合計移動距離
         total_amount: 合計金額
         country_id: 国籍
         prefecture_id: 都道府県
