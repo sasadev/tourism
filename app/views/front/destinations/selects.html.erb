@@ -1,9 +1,9 @@
 <!-- Title Block -->
-<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/back-7.jpg" data-height="400">
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/route_select.jpg" data-height="400">
   <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
 
   <div class="sayit_title_wrapper col push-middle">
-    <h1 class="sayit_post_title">Tourist Spot </h1>
+    <h1 class="sayit_post_title">ROUTE SELECT</h1>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
         <div class="col col-6 push-center">
           <div class="sayit_widget_title">
             <div class="sayit_widget_container sayit_text_align_center sayit_mb_60">
-              <h2 class="sayit_element_heading sayit_view_type_1">See My Favorite Travels</h2>
+              <h2 class="sayit_element_heading sayit_view_type_1">Route Map</h2>
             </div>
           </div>
         </div>
@@ -75,6 +75,10 @@
             <div class="sayit_posts_item" style="width: 40%;">
               <div id="gmap"></div>
               <div id="route"></div>
+
+              <div style="margin-top: 30px;">
+                <%= button_tag '印刷する', onclick: 'window.print();' %>
+              </div>
             </div>
 
             <!-- Item 3 -->
@@ -137,20 +141,28 @@
 
                           <div class="sayit_blog_item_divider"></div>
                         </div>
-                        <div class="sayit_blog_item post_item_standard">
-                          <a class="sayit_blog_item_wrapper" href="post_standard.html">
-                            <div class="row">
-                              <div class="col col-12 sayit_blog_item_content_cont">
-                                <h4 class="sayit_post_title">合計時間: <span id="all_time"></span>分</h4>
-                                <h4 class="sayit_post_title">合計距離: <span id="all_distance"></span> km</h4>
-                                <% if @like_contents.present? %>
-                                    <% total_amount = @like_contents.pluck(:amount).sum %>
-                                    <h4 class="sayit_post_title">合計金額: <%= number_to_currency(total_amount) %></h4>
-                                <% end %>
-                              </div>
+                        <%= form_tag complete_destinations_path do %>
+                            <div class="sayit_blog_item post_item_standard">
+                              <a class="sayit_blog_item_wrapper" href="post_standard.html">
+                                <div class="row">
+                                  <div class="col col-12 sayit_blog_item_content_cont">
+                                    <h4 class="sayit_post_title">合計時間: <span id="all_time"></span>分</h4>
+                                    <h4 class="sayit_post_title">合計距離: <span id="all_distance"></span> km</h4>
+                                    <% if @like_contents.present? %>
+                                        <% total_amount = @like_contents.pluck(:amount).sum %>
+                                        <h4 class="sayit_post_title">合計金額: <%= number_to_currency(total_amount) %></h4>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              </a>
+                              <% if @like_contents.present? %>
+                                <%= hidden_field_tag :total_amount, total_amount %>
+                              <% end %>
+                              <%= hidden_field_tag :total_destance %>
+                              <%= hidden_field_tag :total_time %>
+                              <%= submit_tag '完了する' %>
                             </div>
-                          </a>
-                        </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -221,9 +233,13 @@
             <% end %>
           <% end %>
         var all_time = document.getElementById('all_time')
+        var total_time = document.getElementById('total_time')
         var all_distance = document.getElementById('all_distance')
+        var total_distance = document.getElementById('total_destance')
         all_time.innerHTML = Sum(time_array)
+        total_time.value = DistanceSum(time_array)
         all_distance.innerHTML = DistanceSum(distance_array)
+        total_distance.value = DistanceSum(distance_array)
       }
     });
   }

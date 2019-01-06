@@ -16,27 +16,27 @@
 
 <body class="sayit_js_bg_color" data-bgcolor="#ffffff">
 <!-- Additional Sidebar -->
-    <div class="sayit_additional_sidebar_cont">
-      <a class="sayit_additional_sidebar_close_button" href="javascript:void(0)"><i class="fa fa-times"></i></a>
+<div class="sayit_additional_sidebar_cont">
+  <a class="sayit_additional_sidebar_close_button" href="javascript:void(0)"><i class="fa fa-times"></i></a>
 
-      <div class="sayit_additional_sidebar">
-        <div class="widget widget_text">
-          <h6 class="widgettitle">Weather</h6>
+  <div class="sayit_additional_sidebar">
+    <div class="widget widget_text">
+      <h6 class="widgettitle">Weather</h6>
 
-          <div class="col col-12 sayit_content">
-            <div class="sayit_tiny">
-              <div class="sayit_blog_listing_widget">
-                <div class="sayit_widget_container">
-                  <div class="sayit_modern_blog_listing_cont">
-                    <div id="weather"></div>
-                  </div>
-                </div>
+      <div class="col col-12 sayit_content">
+        <div class="sayit_tiny">
+          <div class="sayit_blog_listing_widget">
+            <div class="sayit_widget_container">
+              <div class="sayit_modern_blog_listing_cont">
+                <div id="weather"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 <div class="sayit_additional_overlay"></div>
 
 <!-- Header -->
@@ -56,37 +56,37 @@
       </div>
     </div>
 
-        <div class="col sayit_menu_container col-8">
-          <div class="sayit_menu_cont">
-            <div class="sayit_additional_button_cont">
-              <a class="sayit_additional_sidebar_trigger" href="javascript:void(0)" title="Open Additional Sidebar"><i class="fa fa-cloud"></i></a>
-            </div>
-
-            <div class="sayit_menu_inner">
-              <ul class="sayit_menu sayit_header_menu">
-                <% if session[:destination_id].blank? %>
-                    <li class="menu-item">
-                      <%= link_to '移動手段情報入力', new_destination_path %>
-                    </li>
-                <% else %>
-                    <li class="menu-item">
-                      <%= link_to '観光スポット選択', tour_selects_path %></a>
-                    </li>
-
-                    <!-- Blog -->
-                    <li class="menu-item">
-                      <%= link_to '移動手段決定', selects_destinations_path %></a>
-                    </li>
-
-                    <!-- Places -->
-                    <li class="menu-item">
-                      <%= link_to '移動手段情報編集', edit_destination_path(id: session[:destination_id]) %>
-                    </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
+    <div class="col sayit_menu_container col-8">
+      <div class="sayit_menu_cont">
+        <div class="sayit_additional_button_cont">
+          <a class="sayit_additional_sidebar_trigger" href="javascript:void(0)" title="Open Additional Sidebar"><i class="fa fa-cloud"></i></a>
         </div>
+
+        <div class="sayit_menu_inner">
+          <ul class="sayit_menu sayit_header_menu">
+            <% if session[:destination_id].blank? %>
+                <li class="menu-item">
+                  <%= link_to 'Setting', new_destination_path %>
+                </li>
+            <% else %>
+                <li class="menu-item">
+                  <%= link_to 'Spot Search', tour_selects_path %></a>
+                </li>
+
+                <!-- Blog -->
+                <li class="menu-item">
+                  <%= link_to 'Route Select', selects_destinations_path %></a>
+                </li>
+
+                <!-- Places -->
+                <li class="menu-item">
+                  <%= link_to 'Setting', edit_destination_path(id: session[:destination_id]) %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="sayit_menu_mobile">
@@ -166,6 +166,7 @@
 <!-- Footer -->
 <div class="sayit_footer">
   <!-- Footer Instagram -->
+  <% if false %>
       <div class="sayit_photostream">
         <div class="instagallery">
           <!-- Item 1 -->
@@ -321,6 +322,7 @@
           </div>
         </div>
       </div>
+  <% end %>
 
   <!-- Back To Top -->
   <a class="sayit_back_to_top" href="javascript:void(0)">Top</a>
@@ -333,16 +335,18 @@
             <a class="sayit_image_logo sayit_retina" href="/"></a>
           </div>
 
-          <div class="col col-10 sayit_footer_menu_container">
-            <div class="menu-footer-menu-container">
-              <ul class="sayit_footer_menu">
-                <li class="menu-item"><a href="about.html">About</a></li>
-                <li class="menu-item"><a href="blog_modern.html">Blog</a></li>
-                <li class="menu-item"><a href="typography.html">Typography</a></li>
-                <li class="menu-item"><a href="contacts.html">Contacts</a></li>
-              </ul>
-            </div>
-          </div>
+          <% if false %>
+              <div class="col col-10 sayit_footer_menu_container">
+                <div class="menu-footer-menu-container">
+                  <ul class="sayit_footer_menu">
+                    <li class="menu-item"><a href="about.html">About</a></li>
+                    <li class="menu-item"><a href="blog_modern.html">Blog</a></li>
+                    <li class="menu-item"><a href="typography.html">Typography</a></li>
+                    <li class="menu-item"><a href="contacts.html">Contacts</a></li>
+                  </ul>
+                </div>
+              </div>
+          <% end %>
         </div>
       </div>
     </div>

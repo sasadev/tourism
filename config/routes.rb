@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       get :add_content, on: :collection
       get :add_like, on: :collection
       get :no_like, on: :collection
+      post :complete, on: :collection
       match :start_zip_search, via: [:get, :post, :patch], on: :collection
       match :end_zip_search, via: [:get, :post, :patch], on: :collection
     end

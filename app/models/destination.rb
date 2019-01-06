@@ -19,6 +19,8 @@ class Destination < BasicRecord::Base001
   accepts_nested_attributes_for :destination_transportations, allow_destroy: true
   accepts_nested_attributes_for :destination_contents, allow_destroy: true
 
+  validates :start_zip, :end_zip, :start_address, :end_address, :start_prefecture_id, :end_prefecture_id, :departure, :arrival, presence: {}
+
   def start_full_address
     full_address = "%s %s"%([self.start_prefecture&.name,self.start_address])
     return full_address

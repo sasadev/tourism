@@ -121,6 +121,16 @@ class Front::DestinationsController < Front::BaseController
     @destination_content = @destination.destination_contents.find_by(content_id: params[:content_id])
   end
 
+  def complete
+    @destination.total_destance = params[:total_destance].to_i if params[:total_destance].present?
+    @destination.total_time = params[:total_time].to_i if params[:total_time].present?
+    @destination.total_amount = params[:total_amount].to_i if params[:total_amount].present?
+    @destination.save
+
+    session[:destination_id] = nil
+    redirect_to root_path
+  end
+
   private
   def set_destination
     @destination = Destination.custom_find_by(id: params[:id])

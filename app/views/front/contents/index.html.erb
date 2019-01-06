@@ -1,9 +1,9 @@
 <!-- Title Block -->
-<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/back-7.jpg" data-height="800">
+<div class="sayit_title_container row sayit_js_height sayit_js_bg_image sayit_block_with_fimage" data-src="/images/front/clipart/spot_search.jpg" data-height="400">
   <div class="sayit_overlay sayit_fimage_overlay_type_light"></div>
 
   <div class="sayit_title_wrapper col push-middle">
-    <h1 class="sayit_post_title">Tourist Spot </h1>
+    <h1 class="sayit_post_title">SPOT SEARCH</h1>
   </div>
 </div>
 
@@ -81,11 +81,16 @@
         <h6 class="widgettitle"><span>Categories</span></h6>
 
         <ul>
-          <% Category.alive_records.order(sort_seq: :asc).each do |category| %>
+          <% categories = Category.alive_records.order(sort_seq: :asc) %>
+          <% category_check = categories.first&.id %>
+          <%
+            category_check = params[:query][:category_id].to_i if params[:query][:category_id].present?
+          %>
+          <% categories.each do |category| %>
               <li>
                 <% params[:query][:category_id] = category.id %>
-                <%= link_to tour_selects_path(query: params[:query]) do %>
-                    <%= category.title %>
+                <%= link_to tour_selects_path(query: params[:query]), style: "#{'color: #d8ba99' if category_check == category.id}" do %>
+                    <%= category&.title %>
                 <% end %>
               </li>
           <% end %>
